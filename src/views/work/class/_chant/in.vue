@@ -4,73 +4,75 @@
       <van-empty description="暂未开课"></van-empty>
     </template>
     <template v-else>
-      <v-page ref="page" @on-page="onPage">
+      <v-page ref="page"
+              @on-page="onPage">
         <van-empty v-if="!item.length"></van-empty>
         <ul>
-          <li
-            v-for="(i, j) in item"
-            :key="j"
-            class="flex"
-            @click.stop="ondet(i)"
-          >
+          <li v-for="(i, j) in item"
+              :key="j"
+              class="flex"
+              @click.stop="ondet(i)">
             <div class="logo">
-              <van-image v-lazy :src="i.avatar || i.child_base_map"></van-image>
+              <van-image v-lazy
+                         :src="i.avatar || i.child_base_map"></van-image>
             </div>
             <div class="text">
               <div class="name">
                 {{ i.child_name }}
-                <van-tag v-if="+i.type === 2" type="primary">家长打卡</van-tag>
+                <van-tag v-if="+i.type === 2"
+                         type="primary">家长打卡</van-tag>
               </div>
-              <div class="players" @click.stop>
+              <div class="players"
+                   @click.stop>
                 <template v-if="i.play">
-                  <div :id="'player-' + j" @click.stop=""></div>
+                  <div :id="'player-' + j"
+                       @click.stop=""></div>
                 </template>
                 <template v-else>
                   <div class="poster">
-                    <van-image :src="i.picture || ''" fit="cover"></van-image>
-                    <div class="player" @click.stop="onCreatePlayer(i, j)">
+                    <van-image :src="i.picture || ''"
+                               fit="cover"></van-image>
+                    <div class="player"
+                         @click.stop="onCreatePlayer(i, j)">
                       <van-icon name="play-circle-o" />
                     </div>
                   </div>
                 </template>
               </div>
-              <div class="content" v-html="i.content"></div>
+              <div class="content"
+                   v-html="i.content"></div>
               <div class="tools flex van-hairline--top">
                 <span @click.stop="onvent('like', i, j)">
-                  <img
-                    :src="icons(+i.give === 2 ? 201 : 202)"
-                    alt=""
-                    class="db_image"
-                  />
-                  <b>点赞({{ tonum(i.like_count) }})</b>
+                  <img :src="icons(+i.give === 2 ? 201 : 202)"
+                       alt=""
+                       class="db_image" />
+                  <b>点赞 ({{ tonum(i.like_count) }})</b>
                 </span>
                 <span @click.stop="onvent('comment', i, j)">
-                  <img :src="icons(203)" alt="" class="db_image" />
-                  <b>评论({{ tonum(i.comment_count) }})</b>
+                  <img :src="icons(203)"
+                       alt=""
+                       class="db_image" />
+                  <b>评论 ({{ tonum(i.comment_count) }})</b>
                 </span>
                 <span @click.stop="onvent('share', i, j)">
-                  <img :src="icons(200)" alt="" class="db_image" />
+                  <img :src="icons(200)"
+                       alt=""
+                       class="db_image" />
                   <b>分享</b>
                 </span>
               </div>
-              <div
-                class="comments"
-                v-if="i.country_study_comment && i.country_study_comment.length"
-              >
-                <div
-                  class="comment_line"
-                  v-for="(x, y) in tocommentmore(i.country_study_comment)"
-                  :key="y + 's' + j"
-                  @click.stop="onvent('commentparent', i, j, y)"
-                >
+              <div class="comments"
+                   v-if="i.country_study_comment && i.country_study_comment.length">
+                <div class="comment_line"
+                     v-for="(x, y) in tocommentmore(i.country_study_comment)"
+                     :key="y + 's' + j"
+                     @click.stop="onvent('commentparent', i, j, y)">
                   <b class="names col_primary">{{ x.name }}:</b>
                   <b v-html="x.comment"></b>
                 </div>
-                <div
-                  class="comment_line"
-                  v-if="i.comment_count > 3"
-                  @click.stop="ondet(i)"
-                >
+                <div class="comment_line"
+                     v-if="i.comment_count > 3"
+                     @click.stop="ondet(i)">
                   <b class="col_info">更多回复</b>
                 </div>
               </div>
@@ -80,26 +82,23 @@
       </v-page>
     </template>
     <transition name="van-fade">
-      <div
-        class="app_show_fixed tran top"
-        v-if="comment.open"
-        style="z-index: 502"
-      >
-        <span class="comment_cover" @click="onCommentReset"></span>
-        <v-c
-          v-model="comment.message"
-          @change="onCommentSubmit"
-          @end="comend"
-        ></v-c>
+      <div class="app_show_fixed tran top"
+           v-if="comment.open"
+           style="z-index: 502">
+        <span class="comment_cover"
+              @click="onCommentReset"></span>
+        <v-c v-model="comment.message"
+             @change="onCommentSubmit"
+             @end="comend"></v-c>
       </div>
     </transition>
-    <v-f v-model="open" :footer="false" bgc="#f8f7fa">
-      <v-d
-        :ext="ext"
-        @likes="setlikes"
-        @comments="setcomments"
-        @shares="onshares"
-      ></v-d>
+    <v-f v-model="open"
+         :footer="false"
+         bgc="#f8f7fa">
+      <v-d :ext="ext"
+           @likes="setlikes"
+           @comments="setcomments"
+           @shares="onshares"></v-d>
     </v-f>
   </div>
 </template>
@@ -374,6 +373,7 @@ li {
   margin: 10px;
   padding-left: 10px;
   box-sizing: border-box;
+
   .logo {
     width: 50px;
     height: 50px;
@@ -382,6 +382,7 @@ li {
     overflow: hidden;
     transform: translateY(20px);
   }
+
   .text {
     width: calc(100% - 55px);
     border-radius: 5px;
@@ -390,6 +391,7 @@ li {
     padding: 10px;
     font-size: 16px;
   }
+
   .players {
     height: 150px;
     background-color: #222;
@@ -397,48 +399,59 @@ li {
     overflow: hidden;
     margin: 5px 0;
   }
+
   .name {
     font-weight: 650;
     padding: 8px 0;
   }
+
   .content {
     padding: 5px;
     font-size: 14px;
     color: #999;
   }
+
   .tools {
     height: 40px;
     margin-bottom: 5px;
     font-size: 12px;
     padding-top: 5px;
+
     span {
       flex: 1;
       display: flex;
       align-items: center;
+
       img {
         width: 30px;
         height: 30px;
         margin-right: 2px;
         transform: scale(0.5);
       }
+
       b {
         transform: translateX(-6px);
       }
     }
   }
+
   .comments {
     padding: 0 5px;
+
     .comment_line {
       font-size: 14px;
       padding: 2px 0;
       color: #999;
+
       .names {
         vertical-align: top;
       }
+
       .name {
         padding-right: 5px;
         opacity: 0.9;
       }
+
       b:last-child {
         display: inline-block;
         word-break: break-all;
@@ -446,9 +459,11 @@ li {
     }
   }
 }
+
 .poster {
   height: 100%;
   position: relative;
+
   .player {
     position: absolute;
     z-index: 5;
@@ -466,6 +481,7 @@ li {
     font-size: 50px;
   }
 }
+
 .comment_cover {
   position: absolute;
   left: 0;

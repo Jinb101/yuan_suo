@@ -2,18 +2,16 @@
   <div class="baby_detail">
     <template v-if="open">
       <div class="app_top">
-        <iframe
-          :src="src + (s ? '&rotate=1' : '')"
-          frameborder="0"
-          class="play"
-          :class="{ auto: s }"
-          allowfullscreen="allowfullscreen"
-          mozallowfullscreen="mozallowfullscreen"
-          msallowfullscreen="msallowfullscreen"
-          oallowfullscreen="oallowfullscreen"
-          webkitallowfullscreen="webkitallowfullscreen"
-          ref="frame"
-        ></iframe>
+        <iframe :src="src + (s ? '&rotate=1' : '')"
+                frameborder="0"
+                class="play"
+                :class="{ auto: s }"
+                allowfullscreen="allowfullscreen"
+                mozallowfullscreen="mozallowfullscreen"
+                msallowfullscreen="msallowfullscreen"
+                oallowfullscreen="oallowfullscreen"
+                webkitallowfullscreen="webkitallowfullscreen"
+                ref="frame"></iframe>
         <div class="tops">
           <h3 class="name">{{ detail.video_name }}</h3>
           <p class="time">
@@ -25,20 +23,19 @@
         </div>
       </div>
       <div class="view">
-        <van-cell
-          :label="totime(i)"
-          is-link
-          v-for="(i, j) in item"
-          :key="j"
-          @click="onDetail(i)"
-        >
+        <van-cell :label="totime(i)"
+                  is-link
+                  v-for="(i, j) in item"
+                  :key="j"
+                  @click="onDetail(i)">
           <template #title>
             <span class="font">{{ i.video_name }}</span>
           </template>
         </van-cell>
       </div>
     </template>
-    <van-empty v-else description="未开放"></van-empty>
+    <van-empty v-else
+               description="未开放"></van-empty>
   </div>
 </template>
 
@@ -84,7 +81,6 @@ export default {
         let type = +this.detail.device_type === 1;
         let v = demo.$local.get("system-mode");
         let definition = !(v.definition === undefined || !v.definition); // 是否高清 大华
-
         if (this.detail.device_type === undefined) {
           type = true;
         }
@@ -115,13 +111,15 @@ export default {
           "baby",
           "admin"
         );
-
+        console.log(h5, demo.siteConfig.api.h5, '--------------------------------------------------------');
         this.src =
           demo.siteConfig.api.h5 +
           "surveillance/?h5=" +
           h5 +
           "&definition=" +
           definition;
+        console.log(this.src);
+
       });
     },
     onDetail(e) {
@@ -149,6 +147,7 @@ export default {
   display: block;
   width: 100%;
   background-color: #fff;
+
   &.auto {
     position: fixed;
     left: 0;
@@ -163,12 +162,14 @@ export default {
   position: relative;
   background-color: #fff;
   z-index: 5;
+
   .name {
     padding: 15px 10px 10px;
     font-size: 15px;
     font-weight: 650;
     line-height: 20px;
   }
+
   .time {
     font-size: 13px;
     color: #999;
@@ -176,6 +177,7 @@ export default {
     line-height: 15px;
   }
 }
+
 .view {
   border-top: 8px solid #f5f5f5;
 }

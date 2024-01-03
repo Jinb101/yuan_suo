@@ -1,26 +1,26 @@
 <template>
   <transition name="van-slide-left">
-    <div class="app_show_fixed" :style="sty" v-if="open">
+    <div class="app_show_fixed"
+         :style="sty"
+         v-if="open">
       <template v-if="customize">
         <slot name="custom" />
       </template>
-      <v-view
-        :text="text"
-        :header="header"
-        back
-        @on-back="open = false"
-        ref="view"
-        :overflow="overflow"
-        :bgc="bgc"
-        :bar="footer"
-        :cover="cover"
-        :coverBgc="coverBgc"
-        :viewbgc="viewbgc"
-        :share="share"
-        :retreat="retreat"
-        @on-share="onshare"
-        @on-cover="oncover"
-      >
+      <v-view :text="text"
+              :header="header"
+              back
+              @on-back="open = false"
+              ref="view"
+              :overflow="overflow"
+              :bgc="bgc"
+              :bar="footer"
+              :cover="cover"
+              :coverBgc="coverBgc"
+              :viewbgc="viewbgc"
+              :share="share"
+              :retreat="retreat"
+              @on-share="onshare"
+              @on-cover="oncover">
         <slot :scope="rect" />
         <template #fixed>
           <slot name="fixed" />
@@ -92,5 +92,4 @@ export default {
   },
 };
 </script>
-<style lang='less' scoped>
-</style>
+<style lang='less' scoped></style>

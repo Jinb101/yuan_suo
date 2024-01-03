@@ -94,7 +94,7 @@ let index = {
     ])
   ]
 }
-// 底部menu
+// 底部 menu
 let menu = fn([
   ['index', '主页', 11, 0, { icons: 1, id: 1000 }],
   ['class', '班级圈', 51, 0, { icons: 5, id: 1001 }],
@@ -224,7 +224,7 @@ let works = {
     // ['to:2', '国学共育', icons(0, 'n', 510), 0, { ...wobj }],
     ['to:2', '吟诵示例', icons(0, 'n', 7022), 0, { ...wobj }],
     ['to:3', '朗读音频', icons(0, 'n', 510), 0, { ...wobj }],
-    ['to:4', '授课PPT', icons(0, 'n', 509), 0, { ...wobj }],
+    ['to:4', '授课 PPT', icons(0, 'n', 509), 0, { ...wobj }],
     ['to:5', '教参', icons(0, 'n', 7023), 0, { ...wobj }],
   ]),
   atten: fn([
@@ -258,6 +258,7 @@ let works = {
       ['work_grow', '成长任务', icons(30, 'n', 206), 422, { ...wobj, id: 20305 }],
       ['work_album', '学期相册', icons(31, 'n', 207), 430, { ...wobj, menulevel: 1004, id: 20306 }],
       ['work_leave', '请假审批', icons(208, 'n', 208), 466, { ...wobj, id: 20307 }],
+      ['work_style', '班级风采', icons(208, 'n', 208), 466, { ...wobj, id: 20308 }],
       ['work_chant', '国学', icons(0, 'n', 7004), 802, { ...wobj, id: 20308 }],
       ['vote2', '投票系统', icons(0, 'n', 7024), 803, { ...wobj, id: 20309 }],
     ]),

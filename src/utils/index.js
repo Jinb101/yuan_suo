@@ -25,7 +25,7 @@ class Tools {
           const canvas = document.createElement('canvas');
           const ctx = canvas.getContext('2d');
 
-          // 假设将图片调整为宽度为800像素
+          // 假设将图片调整为宽度为 800 像素
           const targetWidth = 800;
           const targetHeight = (img.height / img.width) * targetWidth;
 
@@ -45,7 +45,7 @@ class Tools {
 
             console.log('图片压缩成功');
             resolve(compressedImage);
-          }, 'image/jpeg', 0.2); // 压缩质量为70%
+          }, 'image/jpeg', 0.2); // 压缩质量为 70%
         };
       };
     });
@@ -53,14 +53,13 @@ class Tools {
 
   static compressVideo(videoFile) {
     return new Promise((resolve, reject) => {
-      const mediaSource = new MediaSource();
       const video = document.createElement('video');
       video.src = URL.createObjectURL(videoFile);
+
       video.onloadedmetadata = () => {
         const canvas = document.createElement('canvas');
         const ctx = canvas.getContext('2d');
 
-        // 假设将视频调整为宽度为800像素
         const targetWidth = 800;
         const targetHeight = (video.videoHeight / video.videoWidth) * targetWidth;
 
@@ -82,27 +81,36 @@ class Tools {
             type: 'video/webm',
           });
 
-          const url = URL.createObjectURL(compressedVideo);
           const compressedVideoFile = new File([compressedVideo], `compressed_${videoFile.name}`, {
             type: 'video/webm',
             lastModified: Date.now(),
           });
 
-          // 假设压缩后的文件大小为原文件大小的一半
-          compressedVideoFile.customSize = videoFile.size / 2;
-          console.log('视频压缩成功');
+          console.log(`压缩前大小：${videoFile.size} bytes`);
+          console.log(`压缩后大小：${compressedVideoFile.size} bytes`);
+
           resolve(compressedVideoFile);
         };
 
         video.play();
         mediaRecorder.start();
+
+        // 添加错误处理
+        mediaRecorder.onerror = (e) => {
+          reject(e);
+        };
+
         setTimeout(() => {
           mediaRecorder.stop();
           video.pause();
           stream.getTracks().forEach((track) => {
             track.stop();
           });
-        }, 5000); // 假设压缩时长为5秒
+        }, 5000);
+      };
+
+      video.onerror = (e) => {
+        reject(e);
       };
     });
   }

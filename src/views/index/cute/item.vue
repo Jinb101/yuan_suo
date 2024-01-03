@@ -1,22 +1,25 @@
 <template>
   <div class="cute_item">
-    <van-empty v-if="!item.length" description="暂无精彩瞬间"></van-empty>
-    <section
-      v-for="(i, j) in list"
-      :key="j"
-      class="van-hairline--bottom"
-      :class="{ pad: pad }"
-      @click.stop="onDetail(i)"
-    >
+    <van-empty v-if="!item.length"
+               description="暂无精彩瞬间"></van-empty>
+    <section v-for="(i, j) in list"
+             :key="j"
+             class="van-hairline--bottom"
+             :class="{ pad: pad }"
+             @click.stop="onDetail(i)">
       <h2 class="van-ellipsis">{{ i.title || "精彩瞬间" }}</h2>
       <div class="view_video">
         <template v-if="i.play">
-          <div :id="'player-' + j" @click.stop=""></div>
+          <div :id="'player-' + j"
+               @click.stop=""></div>
         </template>
         <template v-else>
           <div class="poster">
-            <van-image :src="i.cover[0]" fit="cover" lazy-load></van-image>
-            <div class="player" @click.stop="onCreatePlayer(i, j)">
+            <van-image :src="i.cover[0]"
+                       fit="cover"
+                       lazy-load></van-image>
+            <div class="player"
+                 @click.stop="onCreatePlayer(i, j)">
               <van-icon name="play-circle-o" />
             </div>
           </div>
@@ -31,10 +34,9 @@
             <van-icon name="eye-o" /><b>{{ i.pageview }}</b>
           </span>
           <template v-if="i.like === 1">
-            <span
-              @click.stop="onTagChange({ index: j, ext: i, type: 'unlike' })"
-            >
-              <van-icon name="like" color="#f38979" />
+            <span @click.stop="onTagChange({ index: j, ext: i, type: 'unlike' })">
+              <van-icon name="like"
+                        color="#f38979" />
               <b style="color: #f38979">{{ i.quantity }}</b>
             </span>
           </template>
@@ -45,13 +47,11 @@
           </template>
         </div>
       </div>
-      <v-more
-        v-model="i.open"
-        tag
-        class="tag_up"
-        :item="toTag(i, j)"
-        @change="onTagChange"
-      ></v-more>
+      <v-more v-model="i.open"
+              tag
+              class="tag_up"
+              :item="toTag(i, j)"
+              @change="onTagChange"></v-more>
     </section>
   </div>
 </template>
@@ -184,6 +184,7 @@ section {
   padding: 5px;
   background-color: #fff;
   margin: 0 10px;
+
   h2 {
     font-size: 15px;
     font-weight: 650;
@@ -192,6 +193,7 @@ section {
     height: 31px;
     box-sizing: border-box;
   }
+
   .view_video {
     height: 195px;
     width: 100%;
@@ -199,34 +201,42 @@ section {
     overflow: hidden;
     background-color: #f7f7f7;
   }
+
   .tool {
     padding: 5px 0;
     line-height: 16px;
     font-size: 12px;
+
     .time {
       color: #999;
     }
+
     .btns {
       flex: 1;
       display: flex;
       flex-direction: row-reverse;
+
       span {
         padding-left: 5px;
         display: flex;
         align-items: center;
+
         i {
           font-size: 16px;
           margin-right: 5px;
         }
+
         b {
           min-width: 20px;
         }
       }
     }
   }
+
   .poster {
     height: 100%;
     position: relative;
+
     .player {
       position: absolute;
       z-index: 5;
@@ -244,19 +254,22 @@ section {
       font-size: 50px;
     }
   }
+
   [id^="player"] {
     height: 100%;
     width: 100%;
     display: block;
   }
+
   &.pad {
     margin: 0;
+
     .view_video {
       height: 182px;
     }
   }
 }
+
 .tag_up {
   top: 8px !important;
-}
-</style>
+}</style>

@@ -17,7 +17,9 @@
              @click.stop="onComment(curItem, index)">
           <span v-if="curItem.to_name"
                 style="color: #3d97c7;fontSize:12px;margin-left: 4px;">@{{ curItem.to_name }} </span>
-          <span v-html="curItem.comment">
+
+          <span class=""
+                v-html="curItem.comment">
           </span>
         </div>
         <div class="del"
@@ -29,7 +31,7 @@
       <li v-if="item.comment_count > 6 && item.comment.length > 6 && !wherdets">
         <span class="col_green"
               @click.stop="oepnModel()">
-          更多评论({{ item.comment_count - 6 }})
+          更多评论 ({{ item.comment_count - 6 }})
         </span>
       </li>
 
@@ -64,7 +66,7 @@
       <li v-if="!end">
         <span class="col_green"
               @click.stop="onCommentPage(end_id)">
-          更多评论({{
+          更多评论 ({{
             this.item.comment_count - item.comment.length - commentlist.length
           }})
         </span>

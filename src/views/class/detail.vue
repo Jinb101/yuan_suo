@@ -65,7 +65,7 @@
                    alt=""
                    class="db_image" />
             </div>
-            <b>{{ +i.is_like === 1 ? "取消" : "" }}点赞({{ i.likes.length }})</b>
+            <b>{{ +i.is_like === 1 ? "取消" : "" }}点赞 ({{ i.likes.length }})</b>
           </div>
           <div class="key"
                @click.stop="
@@ -80,7 +80,7 @@
                    alt=""
                    class="db_image" />
             </div>
-            <b>评论({{ i.comment_count }})</b>
+            <b>评论 ({{ i.comment_count }})</b>
           </div>
         </div>
         <div class="likes flex"
@@ -223,20 +223,20 @@ export default {
       }
     },
     iconClick(event, direction) {
-      // 获取van-swipe__track节点
+      // 获取 van-swipe__track 节点
       const track = document.querySelector('.van-swipe__track');
-      // 获取van-swipe-item的宽度
+      // 获取 van-swipe-item 的宽度
       const itemWidth = track.querySelector('.van-swipe-item').offsetWidth;
-      // 获取当前transform属性值
+      // 获取当前 transform 属性值
       const transform = window.getComputedStyle(track).getPropertyValue('transform');
       let curIndex = this.curImgIndex + 1;
       console.log(this.curImgIndex);
       console.log('transform:', transform);
       // 在点击事件处理程序中，可以访问事件对象和传递的参数
-      console.log('点击事件对象:', event);
-      console.log('点击方向:', direction);
+      console.log('点击事件对象：', event);
+      console.log('点击方向：', direction);
 
-      // 根据点击方向设置transform属性
+      // 根据点击方向设置 transform 属性
       if (direction === 'left') {
         // 向左点击
         if (curIndex === 1) {
@@ -265,7 +265,7 @@ export default {
       // console.log(this.ImagePreview.startPosition = this.curImgIndex);
       this.$nextTick()
     },
-    // 下载downloadImg
+    // 下载 downloadImg
     downloadImg() {
       if (!this.right_Menu) {
         return
@@ -375,7 +375,7 @@ export default {
           }, (r) => {
             this.value.comment.forEach((comment, index) => {
               if (comment.id === c.id) {
-                // 删除对应的comment数据
+                // 删除对应的 comment 数据
                 this.value.comment.splice(index, 1);
                 this.value.comment_count--;
               }
@@ -591,9 +591,9 @@ export default {
         if (val.comment_count > val.comment.length) {
           let id = val.comment[val.comment.length - 1].id;
           this.commentlist = [];
-          // await this.onCommentPage(id); // 等待onCommentPage执行完毕
+          // await this.onCommentPage(id); // 等待 onCommentPage 执行完毕
           this.$nextTick()
-          // 在这里进行处理，确保onCommentPage执行完毕后再执行下面的代码
+          // 在这里进行处理，确保 onCommentPage 执行完毕后再执行下面的代码
         }
       }
     },
@@ -608,7 +608,7 @@ export default {
               this.end_id = r[r.length - 1].id;
             }
           }
-          resolve(); // 异步请求完成后调用resolve
+          resolve(); // 异步请求完成后调用 resolve
         });
       });
     },
@@ -963,12 +963,12 @@ export default {
 
   .van-icon-arrow:hover {
     transform: scale(1.2);
-    /* 鼠标移入时放大到1.2倍 */
+    /* 鼠标移入时放大到 1.2 倍 */
   }
 
   .van-icon-arrow-left:hover {
     transform: scale(1.2);
-    /* 鼠标移入时放大到1.2倍 */
+    /* 鼠标移入时放大到 1.2 倍 */
   }
 }
 

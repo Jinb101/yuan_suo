@@ -15,15 +15,29 @@ module.exports = {
         target: 'http://test.official.jsxrk.xin/api',
         changeOrigin: true,
         pathRewrite: {
-          '^/api': '/'// 重写,
-        }
+          '^/api': '/'// 重写，
+        },
+        bypass(req, res, options) {
+          const proxyUrl = new URL((options.pathRewrite[req.url] || ''), options.target).href || '';
+          console.log(proxyUrl);
+          console.log(req.url); // 打印完整的请求地址
+          req.headers['x-req-proxy'] = proxyUrl;
+          res.setHeader('x-res-proxy', proxyUrl + req.url);
+        },
       },
       '/env': {
         target: 'http://official.jsxrk.xin/api',
         changeOrigin: true,
         pathRewrite: {
           '^/env': '/'
-        }
+        },
+        bypass(req, res, options) {
+          const proxyUrl = new URL((options.pathRewrite[req.url] || ''), options.target).href || '';
+          console.log(proxyUrl);
+          console.log(req.url); // 打印完整的请求地址
+          req.headers['x-req-proxy'] = proxyUrl;
+          res.setHeader('x-res-proxy', proxyUrl + req.url);
+        },
       }
     },
 

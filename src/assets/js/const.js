@@ -12,7 +12,7 @@ let api = {
 let env = process.env.NODE_ENV === 'development'
 
 if (env) {
-  api.http = '/api/'
+  api.http = '/env/'
 }
 
 if (window.LINKTOAPIWWW) {
@@ -172,7 +172,7 @@ let model = (title, message, fn) => {
     });
 }
 let modeldel = (fn, text = '') => {
-  model('删除提示!', '是否删除' + text + '?', r => {
+  model('删除提示！', '是否删除' + text + '?', r => {
     if (r) {
       fn()
     }

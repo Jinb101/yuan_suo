@@ -15,11 +15,14 @@ import {
   Rate,
   Switch,
   Progress,
-  Loading
+  Loading,
+  DropdownMenu, DropdownItem
 } from 'vant'
 
 import 'amfe-flexible';
 import '@vant/touch-emulator';
+import "tailwindcss/tailwind.css";
+import "./style.less";
 
 // import vToolScroll from 'com/scroll/better_scroll.vue'
 import vView from './views/public/view.vue'
@@ -35,6 +38,7 @@ import xj from 'com/demo/index.js'
 import $api from 'public/api/api.js'
 import $js from 'public/js/const.js'
 import $vx from 'public/js/vx.js'
+import * as seleApi from '../src/assets/api/selfApi.js'
 // import $model from 'public/js/model.js'
 
 Vue.config.productionTip = false
@@ -45,11 +49,14 @@ Vue.use(Icon).use(Tabbar).use(TabbarItem).use(Image).use(Badge).use(Circle).use(
   .use(RadioGroup).use(Search).use(Divider).use(Lazyload).use(Tag).use(Popup).use(DatetimePicker).use(Collapse)
   .use(CollapseItem).use(CellGroup).use(Cell).use(Step).use(Steps).use(Dialog).use(Picker).use(Calendar).use(NoticeBar)
   .use(Popover).use(Swipe).use(SwipeItem).use(Stepper).use(ActionSheet).use(Rate).use(Switch).use(Progress)
+  .use(DropdownMenu)
   .use(Loading)
+  .use(DropdownItem)
 
 Vue.prototype.$api = $api
 // Vue.prototype.$model = $model
 Vue.prototype.$js = $js
+Vue.prototype.$seleApi = seleApi
 // eslint-disable-next-line
 Vue.prototype.$frameview = demo.siteConfig.isframe
 // eslint-disable-next-line

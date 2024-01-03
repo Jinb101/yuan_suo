@@ -26,7 +26,7 @@ demo.access('siteConfig', (() => {
   let colouricon = demo.$local.get('colour-icon-status', '')
   let bytabsatus = demo.$local.get('by-tab-status-api', '')
 
-  demo.options.ajaxUploadTimeout = 9e5 // 15分钟
+  demo.options.ajaxUploadTimeout = 9e5 // 15 分钟
   demo.options.ajaxTimeout = 12e4
 
   let _location = window.location
@@ -34,7 +34,7 @@ demo.access('siteConfig', (() => {
   let isframe = _location.href.indexOf('/new/') >= 0 || !!params.frame
   let isdebug = _location.pathname.indexOf('ys') > 0
   let iseditor = true
-  let isgetbytab = false // 是否收集用户访问api次数
+  let isgetbytab = false // 是否收集用户访问 api 次数
   if (+bytabsatus === 1) {
     isgetbytab = true
   }
@@ -257,7 +257,7 @@ demo.access('siteConfig', (() => {
       return JSON.parse(JSON.stringify(t))
     },
     emoji: [{ name: "2", count: 59, suffix: ".png", text: "" }],
-    moneytograde: 1, // 积分换算成金额比 即 100积分 = 100/moneytograde 元
+    moneytograde: 1, // 积分换算成金额比 即 100 积分 = 100/moneytograde 元
     levelmenu: [
       '3000', '3001', '3002', '', '', '', '10201', '1001', '10000', '10001',
       '10002', '10003', '20100', '20101', '20102', '20103', '20104', '20105', '20106', '10004',
@@ -535,7 +535,7 @@ demo.access('siteApi', () => {
   // 检测访问 [集团/园所]
   let api = {}
   let loginApi = {}
-  // type [0未登录，1已登录]
+  // type [0 未登录，1 已登录]
   let fn = (url, text, linktype = 1, type = 1) => {
     let temp = []
     let n = 'nursery'
@@ -663,6 +663,9 @@ demo.access('siteApi', () => {
       case 42:
         temp = [n, 'v2_country_study']
         break
+      case 43:
+        temp = [n, 'electronic_class_cards']
+        break
       default:
     }
     temp.push(url)
@@ -672,8 +675,8 @@ demo.access('siteApi', () => {
   let a202207 = {
     config: fn('com/common/nursery_info', '园所基本信息', null, 0),
     wx: fn('com/common/get_share', '获取微信设置', null, 0),
-    openid: fn('com/common/get_openid', '获取openid', null, 0),
-    gettoken: fn('com/nursery_common/get_token', '获取token', null, 0),
+    openid: fn('com/common/get_openid', '获取 openid', null, 0),
+    gettoken: fn('com/nursery_common/get_token', '获取 token', null, 0),
     login: fn('login', '登录', 10, 0),
     agree: fn('Protocol', '用户协议', 10, 0),
     sms: fn('sendsms', '发送验证码', 10, 0),
@@ -684,7 +687,7 @@ demo.access('siteApi', () => {
   }
   let b202207 = {
     upload: fn('uploadImage', '上传', 5),
-    // 主页-通知
+    // 主页 - 通知
     notice: fn('notice', '通知列表', 3),
     noticeMy: fn('sentnotice', '我发的通知', 3),
     noticeSend: fn('sendnotice', '发送通知', 3),
@@ -706,14 +709,14 @@ demo.access('siteApi', () => {
     task: fn('SendMission', '发任务', 4),
 
     // 审批
-    approvalDot: fn('approvalcount', '未(审核/处理)数量/未读通知数量', 5),
+    approvalDot: fn('approvalcount', '未 (审核/处理) 数量/未读通知数量', 5),
     approvalMyDot: fn('little_red_dot', '我的审批未处理数量', 5),
-    approvalMySend: fn('myapproval', '我的审批-我发起的', 3),
-    approvalMyWait: fn('approvaltome', '我的审批-待我审批', 3),
-    approvalMyNotice: fn('approvalinformme', '我的审批-知会我的', 3),
-    approvalMySendDetail: fn('myapprovaldetail', '我的审批-我发起的详情', 3),
-    approvalMyWaitDetail: fn('approvaltomedetail', '我的审批-待我审批详情', 3),
-    approvalMyNoticeDetail: fn('approvalinformmedetail', '我的审批-知会我的详情', 3),
+    approvalMySend: fn('myapproval', '我的审批 - 我发起的', 3),
+    approvalMyWait: fn('approvaltome', '我的审批 - 待我审批', 3),
+    approvalMyNotice: fn('approvalinformme', '我的审批 - 知会我的', 3),
+    approvalMySendDetail: fn('myapprovaldetail', '我的审批 - 我发起的详情', 3),
+    approvalMyWaitDetail: fn('approvaltomedetail', '我的审批 - 待我审批详情', 3),
+    approvalMyNoticeDetail: fn('approvalinformmedetail', '我的审批 - 知会我的详情', 3),
     approvalMyStatus: fn('changeapprovalstatus', '更改状态', 3),
     approvalMyAnswer: fn('explain', '审批说明回复', 3),
     approvalMySetnum: fn('modifyApproval', '修改领用物品数量', 3),
@@ -733,14 +736,14 @@ demo.access('siteApi', () => {
     censusChilds: fn('class_attendance', '幼儿考勤率', 3),
     censusTeach: fn('nursery/teacher/schoolmaster', '老师考勤'),
 
-    // 主页-精彩瞬间
+    // 主页 - 精彩瞬间
     cute: fn('lovable', '精彩瞬间', 6),
     cutestatus: fn('likeCancelLike', '点赞', 6),
     cutedel: fn('lovable_delete', '删除', 6),
     cuteadd: fn('addLovable', '添加', 6),
     cutedet: fn('lovableDetails', '详情', 6),
 
-    // 主页-园所资讯
+    // 主页 - 园所资讯
     info: fn('information', '列表', 3),
     infodet: fn('details', '详情', 7),
     infoedit: fn('editor', '编辑', 7),
@@ -758,6 +761,9 @@ demo.access('siteApi', () => {
     classdet: fn('Detail', '详情', 8),
     search_class: fn('Index', '搜索',8 ),
     delComment: fn('delMyComment ', '删除我的评论',8 ),
+
+    // 分片上传
+    muUpload: fn('ShardUpload', '分片上传', 5),
 
     // 学期计划
     semester: fn('plan/termPlanDetails', '学期计划详情', 12),
@@ -792,16 +798,16 @@ demo.access('siteApi', () => {
     repairhand: fn('autograph', '签名', 26),
     repairsend: fn('increase', '维修申请', 26),
 
-    // 后勤-采购
+    // 后勤 - 采购
     purchase: fn('purchase', '采购', 16),
     purchasedel: fn('confirm_revote', '撤销', 16),
     purchasesub: fn('confirmEntry', '确认入库', 16),
-    // 后勤-领用
+    // 后勤 - 领用
     receive: fn('receive', '领用', 16),
     receivesub: fn('confirmReceive', '领用确认', 16),
     receiveret: fn('confirmBack', '还库', 16),
     receiveunret: fn('noBack', '不还库', 16),
-    // 后勤-物资
+    // 后勤 - 物资
     supplies: fn('supplies', '物资', 16),
     suppliesdet: fn('suppliesDetails', '详情', 16),
     suppliesupload: fn('upload_pictures', '图片上传', 16),
@@ -810,52 +816,52 @@ demo.access('siteApi', () => {
     suppliesedit: fn('editSupplies', '编辑', 16),
     suppliesdel: fn('delSupplies', '删除', 16),
     suppliessearch: fn('material_search', '搜索', 16),
-    // 后勤-来访登记
+    // 后勤 - 来访登记
     visit: fn('index', '来访登记', 17),
     // visitcode: fn('twentyfour', '来访二维码', 17),
-    // 后勤-食材订单
+    // 后勤 - 食材订单
     foodorder: fn('getFoodList', '食材订单', 20),
     foodorderdet: fn('getFoodOrderInfo', '订单详情', 20),
     foodordersub: fn('confirmFoodOrder', '确认订单', 20),
-    // 保健-喂药
+    // 保健 - 喂药
     medication: fn('index', '喂药列表', 18),
     medicationdet: fn('details', '详情', 18),
     medicationsend: fn('operation', '喂药状态', 18),
     medicationhand: fn('autograph', '签名', 18),
-    // 保健-食谱
+    // 保健 - 食谱
     recipes: fn('latest_recipe', '食谱详情', 22),
     recipeshistory: fn('historical_recipes', '历史食谱', 22),
     receiveid: fn('get_suppliers', '是否供应商食谱', 22),
-    recipesold: fn('latestRecipe', '食谱-未供应商', 22),
-    recipesoldhistory: fn('historicalCookbook', '历史食谱-未供应商', 22),
-    recipesoldpic: fn('upload_recipe_picture', '食谱封面-未供应商', 22),
-    // 班级-考勤
+    recipesold: fn('latestRecipe', '食谱 - 未供应商', 22),
+    recipesoldhistory: fn('historicalCookbook', '历史食谱 - 未供应商', 22),
+    recipesoldpic: fn('upload_recipe_picture', '食谱封面 - 未供应商', 22),
+    // 班级 - 考勤
     atten: fn('childAttendance', '考勤列表', 19),
     attenleave: fn('setLeave', '请假', 15),
     attensend: fn('setArrived', '设为已到', 19),
     attenleaveout: fn('leaving', '离园', 19),
     attencancel: fn('cancelClockOut', '撤销', 15),
-    // 班级-成长任务
+    // 班级 - 成长任务
     grow: fn('homeland/index', '成长任务', 12),
     growadd: fn('homeland/increase', '添加', 12),
     growquest: fn('homeland/questionsAnswered', '答题情况', 12),
     growtext: fn('homeland/jobList', '作业', 12),
     growdet: fn('homeland/details', '作业详情', 12),
-    // 班级-学期相册
+    // 班级 - 学期相册
     classroster: fn('integral/index', '班级名单', 12),
     album: fn('term_album/index', '相册', 12),
     albumadd: fn('term_album/createAlbum', '添加', 12),
     albumedit: fn('term_album/edit', '编辑', 12),
-    // 班级-宝贝奖分
+    // 班级 - 宝贝奖分
     reward: fn('integral/bonusPoints', '奖分', 12),
-    // 班级-班级课表
+    // 班级 - 班级课表
     timetable: fn('getClassPlan', '课表', 16),
     timetableadd: fn('addClassPlan', '添加', 16),
     timetabledel: fn('delClassPlan', '删除', 16),
-    // 班级-宝宝奖分规则
+    // 班级 - 宝宝奖分规则
     rewardrule: fn('integral/points_mall', '奖分规则', 12),
     rewardruleset: fn('integral/add_points_mall', '编辑奖分规则', 12),
-    // 班级-家园联系册
+    // 班级 - 家园联系册
     connection: fn('gardenList', '列表', 21),
     connectionbaby: fn('personalList', '宝宝列表', 21),
     connectiondet: fn('park_details', '详情', 21),
@@ -863,15 +869,15 @@ demo.access('siteApi', () => {
     connectionadd: fn('entry_record', '添加', 21),
     connectionday: fn('dateToBeSent', '待发送日期', 21),
     connectionsend: fn('unifiedSending', '批量发送', 21),
-    // 班级-积分记录
+    // 班级 - 积分记录
     integral: fn('integral/awardScoreRecord', '积分记录', 12),
-    // 班级-积分榜
+    // 班级 - 积分榜
     integralrank: fn('integral/classScoreboard', '积分榜', 12),
-    // 班级-家长入驻
+    // 班级 - 家长入驻
     parent: fn('audit_list', '家长入驻', 23),
     parentdet: fn('auditDetails', '详情', 23),
     parentsend: fn('examine', '审核', 23),
-    // 招生-生源
+    // 招生 - 生源
     recruit: fn('source', '生源', 24),
     recruitcode: fn('qr_code', '招生二维码', 24),
     recruitdet: fn('source_detail', '详情', 24),
@@ -886,28 +892,28 @@ demo.access('siteApi', () => {
     recruitlocatestatus: fn('Position_pending', '定位费待审核', 24),
     recruitlocatecancel: fn('Position_canceled', '定位费已取消', 24),
     recruitlocatedetail: fn('Position_detail', '详情', 24),
-    // 园务-园所风采
+    // 园务 - 园所风采
     kindergartenbrief: fn('organization', '简介', 11),
     kindergartenlist: fn('framework', '荣誉', 11),
     kindergartenadd: fn('honor_add', '添加/vr', 14),
     kindergartendel: fn('honor_del', '删除', 14),
-    // 园务-老师入驻
+    // 园务 - 老师入驻
     kindergartentach: fn('index', '老师入驻', 25),
     kindergartentachstatus: fn('examine', '审核', 25),
     kindergartentachdel: fn('teacherDel', '删除', 25),
-    // 园务-编制
+    // 园务 - 编制
     kindergartenorgan: fn('getShiftStarted', '获取开班人数', 11),
     kindergartenorganset: fn('editShiftStarted', '设置开班人数', 11),
     kindergartenorgansetnum: fn('settingEditing', '设置在编人数', 5),
     kindergartenorganstaff: fn('staffManagement', '获取岗位员工', 11),
     // kindergartenorganstaffdel: fn('deleteEmployee', '删除岗位员工', 11),
     kindergartenorganstaffdels: fn('deleteEmployeeAll', '批量删除员工', 11),
-    // 园务-招聘
+    // 园务 - 招聘
     kindergartenrecruit: fn('recruitList', '招聘', 11),
     kindergartenrecruitdet: fn('resumeDetail', '简历信息', 11),
     kindergartenrecruitqr: fn('humanQrcode', '招聘二维码', 11),
     kindergartenrecruitdel: fn('deleteResume', '删除简历', 11),
-    // 园务-热线地址
+    // 园务 - 热线地址
     kindergartenaddress: fn('nurseryExtDetails', '热线地址', 5),
     kindergartenaddressset: fn('nursery_ext', '更改', 5),
 
@@ -946,19 +952,22 @@ demo.access('siteApi', () => {
     classesarrearage: fn('arrearsRecord', '欠费记录', 19),
     classesarrearageget: fn('receiptMoney', '收款', 19),
     classesarrearageset: fn('reminders', '催款', 19),
+
+    // 班级 - 电子班牌
+    bindPai: fn('BindingElectronicClassCards','绑定电子班牌',43),
     // 管理 - 园所数据
     recordread: fn('readingData', '在读人数', 27),
     recordreg: fn('registered', '在册人数', 27),
     recordatten: fn('attendance', '出勤率', 27),
-    recordfood: fn('foodIngredients', '园所数据', 27), // 1食材 6费用 7退费
-    recorddata: fn('getData', '园所数据', 27), // 2水、3电、4气、5幼儿伙食费、6员工伙食费、7工资、8社保
+    recordfood: fn('foodIngredients', '园所数据', 27), // 1 食材 6 费用 7 退费
+    recorddata: fn('getData', '园所数据', 27), // 2 水、3 电、4 气、5 幼儿伙食费、6 员工伙食费、7 工资、8 社保
     recordadj: fn('adjunction', '详情', 27),
     recordadjadd: fn('add_data_statistics', '添加', 27),
     // recordwater: fn('access_water_electricity', '水电气', 27),
     // 管理 - 积分管理
-    integrallevelm: fn('monthlyScoreboard', '积分榜-月度', 28),
-    integrallevely: fn('SemesterScoreboard', '积分榜-学期学年', 28),
-    integrallevela: fn('TotalScoreboard', '积分榜-总积分', 28),
+    integrallevelm: fn('monthlyScoreboard', '积分榜 - 月度', 28),
+    integrallevely: fn('SemesterScoreboard', '积分榜 - 学期学年', 28),
+    integrallevela: fn('TotalScoreboard', '积分榜 - 总积分', 28),
     integralmym: fn('myMonthlyPoints', '月度积分', 28),
     integralmya: fn('SemesterPoints', '学期/年度积分', 28),
     integralmys: fn('myTotalPoints', '总积分', 28),
@@ -1040,32 +1049,32 @@ demo.access('siteApi', () => {
     userorg: fn('framework', '组织架构', 11),
 
     userhelpmanual: fn('manualList', '员工手册', 11),
-    // 用户-我的考勤
+    // 用户 - 我的考勤
     usermyatten: fn('MyAttendance', '我的考勤', 10),
     usermyattenpunch: fn('attendanceRecord', '打卡记录', 10),
     usermyattenleave: fn('leaveRecord', '请假记录', 10),
     usermyattenpic: fn('getBaseMap', '获取考勤图', 10),
     usermyattenpicset: fn('attendanceBaseMap', '设置考勤图', 10),
-    // 用户-我的签字
+    // 用户 - 我的签字
     usermysign: fn('sign', '签字', 10),
     usermysignadd: fn('add_signature', '添加', 10),
     usermysigndel: fn('delete_signature', '删除', 10),
-    // 用户-我的工资
+    // 用户 - 我的工资
     usermywages: fn('myWage', '我的工资', 11),
-    // 用户-用户手册/帮助
+    // 用户 - 用户手册/帮助
     userhelp: fn('index', '帮助', 36),
     userhelpdet: fn('details', '详情', 36),
-    // 用户-我的信息
+    // 用户 - 我的信息
     userinfologo: fn('editAvatars', '修改头像', 5),
     userinfonick: fn('editNickname', '修改昵称', 5),
     userinfophone: fn('replacementPhone', '更换手机号', 10),
-    // 用户-幼教学堂
+    // 用户 - 幼教学堂
     userschoolmenu: fn('tool/classification', '导航栏', 30),
     userschoollist: fn('schoolroom/index', '列表', 30),
     userschooldet: fn('schoolroom/course_details', '详情', 30),
     userschooldir: fn('schoolroom/catalog', '目录', 30),
     userschooldirdet: fn('schoolroom/details', '目录详情', 30),
-    // 用户-环创集
+    // 用户 - 环创集
     environmentify: fn('innovation/classifiy', '分类获取', 30),
     environmentlist: fn('innovation/index', '列表', 30),
     environmentmy: fn('innovation/myInnovation', '我的', 30),
@@ -1074,7 +1083,7 @@ demo.access('siteApi', () => {
     environmentdel: fn('innovation/delete', '删除', 30),
     environmentdet: fn('innovation/details', '详情', 30),
     environmentlike: fn('innovation/likes', '点赞取消点赞', 30),
-    // 用户-加入集团
+    // 用户 - 加入集团
     userjoingroup: fn('joinGroup', '加入集团', 10),
     // 申请老师
     userjointeach: fn('joinTheGarden', '申请老师', 10),
@@ -1085,7 +1094,7 @@ demo.access('siteApi', () => {
     attensetnum: fn('setAttendanceDays', '设置园所月考勤天数', 3),
 
     // 表单
-    table0000: fn('nursery/profitability/analysis', '学习利润分析表-设置'),
+    table0000: fn('nursery/profitability/analysis', '学习利润分析表 - 设置'),
 
     // 获取
     getAllStaff: fn('getallstaff', '获取全部员工', 5),
@@ -1140,6 +1149,10 @@ demo.access('siteApi', () => {
     posterinfo: fn('MyRegistrationInformation', '报名信息', 32),
     posterrecommed: fn('recommend', '推荐', 32),
     posterdel: fn('DeletePoster', '删除', 32),
+
+    //上传
+    fragUpload: fn('ShardUpload ', '分片上传', 5),
+    fragSyn: fn('SyntheticSharding ', '分片合成', 5),
   }
 
   // 202303 新增
@@ -1192,7 +1205,7 @@ demo.access('siteApi', () => {
     chantgetclsify: fn('ClassroomChineseStudies', '获取班级分类', 42),
     chantdet2: fn('DetailsNationalStudies', '详情', 42),
     chantcheck: fn('ClassifyAndChangeCourses', '换课', 42),
-    chantchecks: fn('ChangingClasses', '换课[all]', 42),
+    chantchecks: fn('ChangingClasses', '换课 [all]', 42),
     chantgetallify: fn('getStudiesClassify', '获取分类', 42),
     chantprevstatus: fn('GetLastSelectedCategory', '上次选中分类', 42),
 
@@ -1226,7 +1239,7 @@ demo.access('siteApi', () => {
     votedelonce: fn('DeleteWork', '删除作品', 39),
     votewrite: fn('comment', '评论', 39),
     votecomment: fn('getComments', '评论列表', 39),
-    // 家园联系册 模板1
+    // 家园联系册 模板 1
     contact40: fn('index', '班级列表', 40),
     contact40list: fn('ObservationRecords', '记录列表', 40),
     contact40temp: fn('LibraryTemplates', '模板库', 40),

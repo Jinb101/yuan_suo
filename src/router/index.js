@@ -190,6 +190,8 @@ const router = new Router({
   routerObj('/work_album', 'work/class/album.vue', 'workalbum', '学期相册'),
   routerObj('/work_album/:id', 'work/class/album.vue', 'workalbums', '学期相册'),
   routerObj('/work_leave', 'work/class/leave.vue', 'workleave', '请假审批'),
+  routerObj('/work_style', 'work/class/style.vue', 'workstyle', '班级风采'),
+  routerObj('/add_work_style', 'work/class/add_style.vue', 'addstyle', '班级风采'),
 
   routerObj('/work_baby', 'work/class/baby.vue', 'workbaby', '宝贝奖分'),
   routerObj('/work_baby/:type&:id', 'work/class/baby.vue', 'workbaby1', '宝贝奖分'),
@@ -338,10 +340,10 @@ router.beforeEach((to, from, next) => {
     }
   }
   // 检测是否外链
-  // 检测是否分享h5
-  // 检测不检测token的页面
+  // 检测是否分享 h5
+  // 检测不检测 token 的页面
 
-  // 检测token
+  // 检测 token
   if (!token && val.indexOf(to.path) < 0) {
     return next('/login')
   }

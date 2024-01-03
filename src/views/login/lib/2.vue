@@ -99,7 +99,7 @@ export default {
         // eslint-disable-next-line
         let c = demo.$local.get("login-code-once-data");
         if (c === this.code) {
-          console.warn("code已使用");
+          console.warn("code 已使用");
           return 0;
         }
         // eslint-disable-next-line
@@ -123,14 +123,13 @@ export default {
     // eslint-disable-next-line
     let v = demo.getUrl();
     this.code = v.code;
-    console.log(v.code);
     this.id = v.id;
     if (!this.code) {
       this.appPath("/login");
       return this.$toast("请重新点击微信一键登录进行登录");
     }
     if (this.code === "null") {
-      console.warn("code不存在");
+      console.warn("code 不存在");
       return 0;
     }
     this.init();

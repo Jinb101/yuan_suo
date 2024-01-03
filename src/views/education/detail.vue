@@ -1,19 +1,21 @@
 <template>
-  <v-view header text="课程详情" ref="view">
-    <div class="app_top" v-if="det.video">
+  <v-view header
+          text="课程详情"
+          ref="view">
+    <div class="app_top"
+         v-if="det.video">
       <div class="player">
-        <v-v
-          :item="{ url: det.video, cover: det.cover_picture }"
-          @create="onvideoinit"
-          @times="onvideotime"
-          ref="video"
-        ></v-v>
+        <v-v :item="{ url: det.video, cover: det.cover_picture }"
+             @create="onvideoinit"
+             @times="onvideotime"
+             ref="video"></v-v>
       </div>
     </div>
     <div class="head van-hairline--bottom">
       <div class="flex">
         <div class="title">{{ det.title }}</div>
-        <div class="share" @click="onsharebtn">
+        <div class="share"
+             @click="onsharebtn">
           <van-icon name="share-o" />
           <b>送人</b>
         </div>
@@ -28,10 +30,7 @@
           <span class="o">{{ prices.original_price }}</span> -->
         </template>
         <template v-else-if="isshareshow > 0">
-          <span class="s"
-            >需转发成功<b>{{ isshareshow }}</b
-            >人解锁完整视频</span
-          >
+          <span class="s">需转发成功<b>{{ isshareshow }}</b>人解锁完整视频</span>
         </template>
         <template v-else-if="islock">
           <span class="k col_green">已解锁</span>
@@ -40,42 +39,45 @@
     </div>
     <!-- <van-empty v-if="!contents" description="暂无详情"></van-empty> -->
     <!-- <div class="app_frame_content auto" v-html="contents"></div> -->
-    <div class="bottom" v-if="ispriceshow || fast">
-      <van-button block type="danger" round @click="onsubmit"
-        >购买（￥{{ prices.price }}）</van-button
-      >
+    <div class="bottom"
+         v-if="ispriceshow || fast">
+      <van-button block
+                  type="danger"
+                  round
+                  @click="onsubmit">购买（￥{{ prices.price }}）</van-button>
     </div>
     <template #fixed>
-      <v-fixed v-model="open" text="下单">
+      <v-fixed v-model="open"
+               text="下单">
         <h6>
           您正在购买<span>{{ det.title }}</span>
         </h6>
-        <van-cell title="选择收货地址" is-link @click="open1 = true"></van-cell>
-        <div class="address" v-if="address_id" @click="open1 = true">
+        <van-cell title="选择收货地址"
+                  is-link
+                  @click="open1 = true"></van-cell>
+        <div class="address"
+             v-if="address_id"
+             @click="open1 = true">
           <div class="name">{{ address.consignee }} {{ address.mobile }}</div>
           <div class="text">
             {{ toCity(address) }}
           </div>
         </div>
         <div class="w80">
-          <van-button
-            block
-            round
-            type="danger"
-            :disabled="!address_id"
-            @click="onpay"
-            >立即下单购买</van-button
-          >
+          <van-button block
+                      round
+                      type="danger"
+                      :disabled="!address_id"
+                      @click="onpay">立即下单购买</van-button>
         </div>
       </v-fixed>
       <transition name="van-fade">
-        <div class="app_show_fixed top" v-if="open1">
-          <v-a
-            change
-            @close="open1 = false"
-            @change="onselectaddress"
-            :address_id="address_id"
-          ></v-a>
+        <div class="app_show_fixed top"
+             v-if="open1">
+          <v-a change
+               @close="open1 = false"
+               @change="onselectaddress"
+               :address_id="address_id"></v-a>
         </div>
       </transition>
     </template>
@@ -143,29 +145,29 @@ export default {
   },
   methods: {
     onshares() {
-          let currentUrl = window.location.href;
-          let baseUrl = currentUrl.split('#')[0];
-          let hash = currentUrl.split('#')[1];
-          let newUrl = baseUrl.includes("?") ? baseUrl + "&tulis=1" : baseUrl + "?tulis=1";
-          newUrl = newUrl + (hash ? '#' + hash : '');
-          newUrl = newUrl.replace("yuansuo/", "parent/");
-          console.log(newUrl);
-          if (!newUrl) return 0;
-          console.log("分享");
-          console.log(this.det);
-          // eslint-disable-next-line no-unused-expressions
-          this.$js.wxshare(
-            {
-              link: newUrl,
-              desc: this.det.title,
-              imgUrl: this.det.cover_picture,
-              logo: this.det.cover_picture
-            },
-            "share",
-            () => {},
-            "1"
-          );
+      let currentUrl = window.location.href;
+      let baseUrl = currentUrl.split('#')[0];
+      let hash = currentUrl.split('#')[1];
+      let newUrl = baseUrl.includes("?") ? baseUrl + "&tulis=1" : baseUrl + "?tulis=1";
+      newUrl = newUrl + (hash ? '#' + hash : '');
+      newUrl = newUrl.replace("yuansuo/", "parent/");
+      console.log(newUrl);
+      if (!newUrl) return 0;
+      console.log(this.det);
+      console.log(this.det);
+      // eslint-disable-next-line no-unused-expressions
+      this.$js.wxshare(
+        {
+          link: newUrl,
+          desc: this.det.title,
+          imgUrl: this.det.cover_picture,
+          logo: this.det.cover_picture
         },
+        "share",
+        () => { },
+        "1"
+      );
+    },
     onsharebtn() {
       console.log(window.location.href);
       this.onshares();
@@ -279,7 +281,7 @@ export default {
             curriculum_id: this.id,
             duration: parseInt(this.times)
           },
-          () => {}
+          () => { }
         );
       }
     },
@@ -336,7 +338,7 @@ export default {
           this.once();
         }, 500);
       });
-      // "viewing_type":"1免费看 2转发看 3付费看"
+      // "viewing_type":"1 免费看 2 转发看 3 付费看"
       // viewing_type === 1 全部解锁
       // viewing_type === 2 number_forwards < share_number 解锁
       // viewing_type === 3 is_purchase === 1 解锁
@@ -395,6 +397,7 @@ export default {
 }
 
 .price {
+
   .p,
   .o {
     position: relative;

@@ -125,14 +125,14 @@ export default {
     end(obj) {
       if (window.getSelection) {
         // ie11 10 9 ff safari
-        obj.focus(); // 解决ff不获取焦点无法定位问题
-        var range = window.getSelection(); // 创建range
-        range.selectAllChildren(obj); // range 选择obj下所有子内容
+        obj.focus(); // 解决 ff 不获取焦点无法定位问题
+        var range = window.getSelection(); // 创建 range
+        range.selectAllChildren(obj); // range 选择 obj 下所有子内容
         range.collapseToEnd(); // 光标移至最后
       } else if (document.selection) {
         // ie10 9 8 7 6 5
         let range = document.selection.createRange(); // 创建选择对象
-        range.moveToElementText(obj); // range定位到obj
+        range.moveToElementText(obj); // range 定位到 obj
         range.collapse(false); // 光标移至最后
         range.select();
       }

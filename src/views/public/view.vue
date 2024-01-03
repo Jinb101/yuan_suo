@@ -108,7 +108,7 @@ export default {
     text: String,
     overflow: Boolean,
     index: [String, Number],
-    retreat: Boolean, // 在不开启header的情况下 显示 返回按钮
+    retreat: Boolean, // 在不开启 header 的情况下 显示 返回按钮
     retreatTop: { type: [Number, String], default: 0 },
     coverBgc: String,
     viewbgc: String,
@@ -303,7 +303,7 @@ export default {
       let nid = demo.$local.get("nid", "");
       let token = demo.siteConfig.tktoggle();
       let time = Date.now();
-      let len = 3e5; // 5分钟缓存
+      let len = 3e5; // 5 分钟缓存
       if (!nid) {
         return 0;
       }
@@ -522,7 +522,7 @@ export default {
     },
     ongetdots() {
       let time = Date.now();
-      let len = 6e4; // 1分钟缓存
+      let len = 6e4; // 1 分钟缓存
       let dot = demo.$session.get("worknum", {});
       if (dot.into_time && dot.into_time > time) {
         this.views.dot = dot;

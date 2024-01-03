@@ -1,10 +1,16 @@
 <template>
-  <v-view retreat bgc="#f8f7fa" index="500" ref="view">
+  <v-view retreat
+          bgc="#f8f7fa"
+          index="500"
+          ref="view">
     <div class="tmep_con1">
       <div class="app_top">
         <div class="header1 flex">
           <section>
-            <v-c v-model="cls" @created="init" db arrow></v-c>
+            <v-c v-model="cls"
+                 @created="init"
+                 db
+                 arrow></v-c>
             <!-- <van-icon name="arrow-down" /> -->
           </section>
           <section @click="open = !open">
@@ -14,43 +20,37 @@
         </div>
         <div class="search flex">
           <div class="s">
-            <v-s v-model="val" @search="onPage(1)" unauto></v-s>
+            <v-s v-model="val"
+                 @search="onPage(1)"
+                 unauto></v-s>
           </div>
           <div class="r">
-            <span
-              class="tap"
-              @click="index = 1"
-              v-if="+index !== 1"
-              :class="{ active: +index !== 0 }"
-              >次数升序</span
-            >
-            <span
-              class="tap"
-              @click="index = 2"
-              v-else
-              :class="{ active: +index !== 0 }"
-              >次数降序</span
-            >
-            <span
-              class="tap"
-              @click="index = 0"
-              :class="{ active: +index === 0 }"
-              >最近更新</span
-            >
+            <span class="tap"
+                  @click="index = 1"
+                  v-if="+index !== 1"
+                  :class="{ active: +index !== 0 }">次数升序</span>
+            <span class="tap"
+                  @click="index = 2"
+                  v-else
+                  :class="{ active: +index !== 0 }">次数降序</span>
+            <span class="tap"
+                  @click="index = 0"
+                  :class="{ active: +index === 0 }">最近更新</span>
           </div>
         </div>
       </div>
-      <v-page ref="page" @on-page="onPage">
+      <v-page ref="page"
+              @on-page="onPage">
         <van-empty v-if="!item.length"></van-empty>
         <ul>
-          <li
-            v-for="(i, j) in item"
-            :key="j"
-            class="flex"
-            @click.stop="ondet(i)"
-          >
+          <li v-for="(i, j) in item"
+              :key="j"
+              class="flex"
+              @click.stop="ondet(i)">
             <div class="logo">
-              <v-a :src="i.base_map" :sex="i.gender" size="1.5466rem"></v-a>
+              <v-a :src="i.base_map"
+                   :sex="i.gender"
+                   size="1.5466rem"></v-a>
             </div>
             <div class="text">
               <h2>
@@ -66,7 +66,8 @@
               </p>
               <p>最后更新：{{ appTimeout(i.modification_time) }}</p>
             </div>
-            <div class="add flex" @click.stop="onadd(i)">
+            <div class="add flex"
+                 @click.stop="onadd(i)">
               <van-icon name="add-o" />
               <b>添加记录</b>
             </div>
@@ -75,12 +76,26 @@
       </v-page>
     </div>
     <template #fixed>
-      <v-t v-model="time" ymd ym :open="open" max="d_0" type="year-month"></v-t>
-      <v-f v-model="open1" :footer="false" text="发布观察记录" bgc="#f8f7fa">
-        <v-pa v-model="ext" @end="onPage(1)"></v-pa>
+      <v-t v-model="time"
+           ymd
+           ym
+           :open="open"
+           max="d_0"
+           type="year-month"></v-t>
+      <v-f v-model="open1"
+           :footer="false"
+           text="发布观察记录"
+           bgc="#f8f7fa">
+        <v-pa v-model="ext"
+              @end="onPage(1)"></v-pa>
       </v-f>
-      <v-f v-model="open2" :footer="false" text="观察记录" bgc="#f8f7fa">
-        <v-pc v-model="ext" @end="onPage(1)" @share="onshare"></v-pc>
+      <v-f v-model="open2"
+           :footer="false"
+           text="观察记录"
+           bgc="#f8f7fa">
+        <v-pc v-model="ext"
+              @end="onPage(1)"
+              @share="onshare"></v-pc>
       </v-f>
     </template>
   </v-view>
@@ -172,7 +187,7 @@ export default {
         }
       );
     },
-    init() {},
+    init() { },
   },
   mounted() {
     this.typeid = this.$route.params.type;
@@ -196,6 +211,7 @@ export default {
     background-color: #fff;
     box-sizing: border-box;
     padding-left: 80px;
+
     section {
       width: 50%;
       box-sizing: border-box;
@@ -203,9 +219,11 @@ export default {
       text-align: center;
       font-size: 14px;
       line-height: 50px;
+
       &:first-child {
         border-right: 1px solid #f8f7fa;
       }
+
       .van-icon {
         position: absolute;
         right: 5px;
@@ -218,13 +236,16 @@ export default {
       }
     }
   }
+
   .search {
     height: 54px;
     background-color: #fff;
     box-sizing: border-box;
+
     .s {
       width: calc(100% - 100px);
     }
+
     .r {
       padding-left: 12px;
       width: 85px;
@@ -232,6 +253,7 @@ export default {
       display: flex;
       align-items: center;
       flex-direction: row-reverse;
+
       span {
         width: 40px;
         height: 40px;
@@ -241,9 +263,11 @@ export default {
         box-sizing: border-box;
         color: #999;
         letter-spacing: 2px;
-        & + span {
+
+        &+span {
           margin-right: 5px;
         }
+
         &.active {
           color: #666;
           text-decoration: underline;
@@ -251,8 +275,10 @@ export default {
       }
     }
   }
+
   ul {
     padding: 8px 0;
+
     li {
       background-color: #fff;
       margin-bottom: 8px;
@@ -261,33 +287,40 @@ export default {
       box-sizing: border-box;
       position: relative;
       padding: 15px 0 0 20px;
+
       .logo {
         width: 58px;
         height: 58px;
         margin-right: 12px;
       }
+
       .text {
         width: calc(100% - 70px);
         box-sizing: border-box;
         position: relative;
         z-index: 10;
         font-size: 12px;
+
         h2 {
           font-weight: 650;
           font-size: 16px;
           line-height: 24px;
           padding: 4px 0;
+
           b {
             padding-left: 8px;
           }
         }
+
         p {
           margin-bottom: 4px;
+
           &:last-child {
             color: #999;
           }
         }
       }
+
       .add {
         position: absolute;
         width: 72px;
@@ -300,11 +333,13 @@ export default {
         align-items: center;
         justify-content: center;
         font-size: 12px;
+
         .van-icon {
           font-size: 35px;
           color: #99cc33;
           margin-bottom: 8px;
         }
+
         &::before {
           position: absolute;
           content: "";
@@ -317,5 +352,4 @@ export default {
       }
     }
   }
-}
-</style>
+}</style>

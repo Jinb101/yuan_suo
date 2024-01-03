@@ -3,15 +3,14 @@
     <template v-if="ext.id">
       <div class="header flex">
         <div class="cover">
-          <img
-            :src="covrimg"
-            class="db_image"
-            alt=""
-            style="object-fit: cover"
-          />
+          <img :src="covrimg"
+               class="db_image"
+               alt=""
+               style="object-fit: cover" />
         </div>
         <div class="logo">
-          <v-a :src="child.base_map" :sex="child.gender === '男' ? 1 : 2"></v-a>
+          <v-a :src="child.base_map"
+               :sex="child.gender === '男' ? 1 : 2"></v-a>
         </div>
         <div class="text">
           <h2>
@@ -20,26 +19,26 @@
           <p>{{ child.class_name }}</p>
         </div>
       </div>
-      <v-page ref="page" @on-page="onPage">
+      <v-page ref="page"
+              @on-page="onPage">
         <ul>
-          <li v-for="(i, j) in item" :key="j" @click.stop="oneve(3, i)">
+          <li v-for="(i, j) in item"
+              :key="j"
+              @click.stop="oneve(3, i)">
             <div class="h">
-              <div
-                class="tag"
-                v-if="i.observation_library"
-                :class="setclass(i.observation_library)"
-              >
+              <div class="tag"
+                   v-if="i.observation_library"
+                   :class="setclass(i.observation_library)">
                 {{ i.observation_library.title }}
               </div>
               <div class="f1"></div>
-              <div
-                class="status"
-                :class="{ col_green: +i.state === 2 }"
-                v-if="+i.status !== 1"
-              >
+              <div class="status"
+                   :class="{ col_green: +i.state === 2 }"
+                   v-if="+i.status !== 1">
                 家长{{ +i.state === 1 ? "未" : "已" }}读
               </div>
-              <div class="status col_ash" v-else>草稿</div>
+              <div class="status col_ash"
+                   v-else>草稿</div>
             </div>
             <h6>
               观察时间<b>{{ appTimeout(i.observation_time) }}</b>
@@ -50,39 +49,48 @@
             <div class="tool van-hairline--top flex">
               <div class="time">{{ appTimeout(i.create_time) }} 发布</div>
               <div class="btns">
-                <span class="col_danger" @click.stop="oneve(0, i)">删除</span>
-                <span class="col_warning" @click.stop="oneve(1, i)">编辑</span>
-                <span
-                  class="col_primary"
-                  @click.stop="oneve(2, i)"
-                  v-if="+i.status !== 1"
-                  >分享</span
-                >
+                <span class="col_danger"
+                      @click.stop="oneve(0, i)">删除</span>
+                <span class="col_warning"
+                      @click.stop="oneve(1, i)">编辑</span>
+                <span class="col_primary"
+                      @click.stop="oneve(2, i)"
+                      v-if="+i.status !== 1">分享</span>
               </div>
             </div>
           </li>
-          <li class="add" @click.stop="adds">
+          <li class="add"
+              @click.stop="adds">
             <van-icon name="add-o" />
             <b>添加观察记录</b>
           </li>
         </ul>
       </v-page>
     </template>
-    <van-empty v-else description="暂无"></van-empty>
-    <v-f v-model="open" :footer="false" :index="600" bgc="#f8f7fa">
-      <v-e edit v-model="det" @end="onendedit"></v-e>
+    <van-empty v-else
+               description="暂无"></van-empty>
+    <v-f v-model="open"
+         :footer="false"
+         :index="600"
+         bgc="#f8f7fa">
+      <v-e edit
+           v-model="det"
+           @end="onendedit"></v-e>
     </v-f>
-    <v-f v-model="open3" :footer="false" :index="601" bgc="#f8f7fa">
-      <v-e v-model="ext3" @end="onPage(1)"></v-e>
+    <v-f v-model="open3"
+         :footer="false"
+         :index="601"
+         bgc="#f8f7fa">
+      <v-e v-model="ext3"
+           @end="onPage(1)"></v-e>
     </v-f>
-    <v-f
-      v-model="open1"
-      :footer="false"
-      :index="600"
-      text="观察记录"
-      bgc="#f8f7fa"
-    >
-      <v-d v-model="ext2" @share="onshare"></v-d>
+    <v-f v-model="open1"
+         :footer="false"
+         :index="600"
+         text="观察记录"
+         bgc="#f8f7fa">
+      <v-d v-model="ext2"
+           @share="onshare"></v-d>
     </v-f>
   </div>
 </template>
@@ -169,7 +177,7 @@ export default {
       if (this.open1) return 0;
       this.appPath(
         "/connection/" +
-          [this.params.type, this.params.id, observe_id].join("&"),
+        [this.params.type, this.params.id, observe_id].join("&"),
         true
       );
       this.$api.http(
@@ -289,6 +297,7 @@ export default {
     box-sizing: border-box;
     position: relative;
     color: #fff;
+
     .cover {
       position: absolute;
       left: 0;
@@ -298,73 +307,89 @@ export default {
       z-index: 1;
       background-color: #38f;
     }
+
     .logo,
     .text {
       position: relative;
       z-index: 5;
     }
+
     .text {
       width: calc(100% - 50px);
       box-sizing: border-box;
       padding: 5px 10px;
+
       h2 {
         font-weight: 650;
         font-size: 16px;
         padding: 5px 0;
+
         b {
           padding-left: 5px;
           font-size: 14px;
           font-weight: 400;
         }
       }
+
       p {
         font-size: 14px;
       }
     }
   }
+
   ul {
     padding-bottom: 130px;
   }
+
   li {
     padding: 20px 15px 8px;
     background-color: #fff;
     margin-bottom: 8px;
     font-size: 15px;
+
     .h {
       height: 24px;
       margin-bottom: 15px;
       line-height: 24px;
       display: flex;
       font-size: 14px;
+
       .tag {
         padding: 0 10px;
         color: #fff;
         line-height: 24px;
       }
+
       .f1 {
         flex: 1;
       }
+
       .status {
         color: tomato;
       }
     }
+
     h6 {
       padding: 5px 0;
       margin-bottom: 3px;
       font-weight: 650;
+
       b {
         font-weight: 400;
         padding-left: 8px;
         color: #999;
       }
     }
+
     .tool {
       font-size: 14px;
       align-items: center;
+
       .btns {
         flex: 1;
         display: flex;
         flex-direction: row-reverse;
+
         span {
           padding: 15px 0 15px 10px;
           margin-left: 10px;
@@ -372,6 +397,7 @@ export default {
         }
       }
     }
+
     &.add {
       display: flex;
       flex-direction: column;
@@ -385,6 +411,7 @@ export default {
       bottom: 0;
       width: 100%;
       margin: 0;
+
       .van-icon {
         font-size: 40px;
         margin-bottom: 10px;

@@ -124,7 +124,7 @@ var demo_es6 = function (cls) {
     }
     /**
      * 压缩图片
-     *@param img 被压缩的img对象
+     *@param img 被压缩的 img 对象
     * @param type 压缩后转换的文件类型
     * @param mx 触发压缩的图片最大宽度限制
     * @param mh 触发压缩的图片最大高度限制
@@ -537,7 +537,7 @@ var demo_es6 = function (cls) {
     return width
   }
 
-  // 获取header
+  // 获取 header
   let header = () => {
     var req = new XMLHttpRequest();
     req.open('GET', document.location.href, false);
@@ -843,7 +843,7 @@ var demo_es6 = function (cls) {
     return os
   }
 
-  // 读取file视频的长度 ios不兼容(可调用，但不会进行判断)
+  // 读取 file 视频的长度 ios 不兼容 (可调用，但不会进行判断)
   let videoTimeout = (file, timeout, fn) => {
     let a = URL.createObjectURL(
       new Blob([file], { type: "application/zip" })
@@ -906,11 +906,11 @@ var demo_es6 = function (cls) {
 
     let openDownloadDialog = (url, saveName) => {
       if (typeof url === "object" && url instanceof Blob) {
-        url = URL.createObjectURL(url); // 创建blob地址
+        url = URL.createObjectURL(url); // 创建 blob 地址
       }
       var aLink = document.createElement("a");
       aLink.href = url;
-      aLink.download = saveName || ""; // HTML5新增的属性，指定保存文件名，可以不要后缀，注意，file:///模式下不会生效
+      aLink.download = saveName || ""; // HTML5 新增的属性，指定保存文件名，可以不要后缀，注意，file:///模式下不会生效
       var event;
       if (window.MouseEvent) event = new MouseEvent("click");
       else {
@@ -942,16 +942,16 @@ var demo_es6 = function (cls) {
         Sheets: {},
       };
       workbook.Sheets[sheetName] = sheet;
-      // 生成excel的配置项
+      // 生成 excel 的配置项
       var wopts = {
         bookType: "xlsx", // 要生成的文件类型
-        bookSST: false, // 是否生成Shared String Table，官方解释是，如果开启生成速度会下降，但在低版本IOS设备上有更好的兼容性
+        bookSST: false, // 是否生成 Shared String Table，官方解释是，如果开启生成速度会下降，但在低版本 IOS 设备上有更好的兼容性
         type: "binary",
       };
       // eslint-disable-next-line
       var wbout = XLSX.write(workbook, wopts);
       var blob = new Blob([s2ab(wbout)], { type: "application/octet-stream" });
-      // 字符串转ArrayBuffer
+      // 字符串转 ArrayBuffer
       function s2ab(s) {
         var buf = new ArrayBuffer(s.length);
         var view = new Uint8Array(buf);
@@ -991,11 +991,11 @@ var demo_es6 = function (cls) {
         break
       default:
     }
-    // 上传转json
-    // json转出
+    // 上传转 json
+    // json 转出
   }
 
-  //将数字（整数）转为汉字，从零到一亿亿，需要小数的可自行截取小数点后面的数字直接替换对应arr1的读法就行了
+  //将数字（整数）转为汉字，从零到一亿亿，需要小数的可自行截取小数点后面的数字直接替换对应 arr1 的读法就行了
   let toChinaNum = (num, isFlag = false, isTW = false) => {
     var arr1 = new Array('零', '一', '二', '三', '四', '五', '六', '七', '八', '九');
     var arr2 = new Array('', '十', '百', '千', '万', '十', '百', '千', '亿', '十', '百', '千', '万', '十', '百', '千', '亿');
@@ -1054,7 +1054,7 @@ var demo_es6 = function (cls) {
     return r(f + result);
   }
 
-  // div转canvas
+  // div 转 canvas
   let tocanvas = async (dom, option = {}, demo) => {
     let ts = demo || window.demo
     if (ts.$obj(html2canvas, 1) !== 5) {
@@ -1252,7 +1252,7 @@ var demo_es6 = function (cls) {
     return webLog
   }
 
-  // 禁止嵌套iframe
+  // 禁止嵌套 iframe
   let nesting = (url) => {
     let link = url ? url : window.location.href
     try {
@@ -1550,7 +1550,7 @@ var demo_month = function (cls) {
       let today = next - 864e5
       return rets(today)
     },
-    // x-y之间
+    // x-y 之间
     between: function (starttime, endtime, issort = false) {
       let s = new Date(starttime).getTime()
       let e = new Date(endtime).getTime()
@@ -1577,7 +1577,7 @@ var demo_month = function (cls) {
   }
 }
 var demo_vx = function (cls) {
-  // 需引入微信jsSdk
+  // 需引入微信 jsSdk
   let that = cls ? cls : demo
   // 当前版本号
   let ver = '1.4.2'
@@ -1954,7 +1954,7 @@ var demo_vx = function (cls) {
   // 网页授权
   /**
    *
-   * @param {Object} con // {data:state参数,link:重定向地址,}
+   * @param {Object} con // {data:state 参数，link:重定向地址，}
    */
   let auth = function (con, fn, ret) {
     let val = _getData('appId')
@@ -1969,10 +1969,10 @@ var demo_vx = function (cls) {
     }, (con || {})))
     let url = 'https://open.weixin.qq.com/connect/oauth2/authorize?' + _ots({
       appid: val, // 公众号的唯一标识
-      redirect_uri: encodeURI(con.link), // 授权后重定向的回调链接地址， 请使用 urlEncode 对链接进行处理
-      response_type: 'code', // 返回类型，请填写code
+      redirect_uri: encodeURI(con.link), // 授权后重定向的回调链接地址，请使用 urlEncode 对链接进行处理
+      response_type: 'code', // 返回类型，请填写 code
       scope: ['snsapi_userinfo', 'snsapi_base'][con.type], // 应用授权作用域 snsapi_base,snsapi_userinfo
-      state: con.data // 重定向后会带上state参数
+      state: con.data // 重定向后会带上 state 参数
     }) + '#wechat_redirect'
     if (ret) return url
     window.location.replace(url)
@@ -2089,7 +2089,7 @@ var demo_vx = function (cls) {
   // 自定义插件 初始化
   /**
    *
-   * @param {Object} config 配置 {type:类型,list:自定义插件,key:微信appid等配置}
+   * @param {Object} config 配置 {type:类型，list:自定义插件，key:微信 appid 等配置}
    * @param {Function} fn 回调 code 判断成功已否
    */
   let plug = (config, fn) => {
@@ -2153,7 +2153,7 @@ class DemoAMap {
   constructor(id, opt, fn, cls) {
     this.demo = cls ? cls : demo
     this.option = demo.copy(Object.assign({
-      icons: [], // 图标库,
+      icons: [], // 图标库，
       key: '0f8670a691f42f3a1959386519de3957',
       keycode: '0be8834c6854645d74fab510fa2466d4',
       plug: []
@@ -2204,7 +2204,7 @@ class DemoAMap {
     return new Promise((resolve, reject) => {
       let load = () => {
         AMapLoader.load({
-          "key": key, // 申请好的Web端开发者Key，首次调用 load 时必填
+          "key": key, // 申请好的 Web 端开发者 Key，首次调用 load 时必填
           "version": "2.1Beta", // 指定要加载的 JSAPI 的版本，缺省时默认为 1.4.15
           "plugins": [
             'AMap.CitySearch',
@@ -2220,7 +2220,7 @@ class DemoAMap {
             'AMap.Geolocation',
             ...this.option.plug
           ], // 需要使用的的插件列表，如比例尺'AMap.Scale'等
-          "Loca": { // 是否加载 Loca， 缺省不加载
+          "Loca": { // 是否加载 Loca，缺省不加载
             "version": '2.0' // Loca 版本
           },
         }).then((AMap) => {
@@ -2407,7 +2407,7 @@ class DemoAMap {
     // new AMap.Buildings({ // 楼块图层
     //     zooms: [16, 18],
     //     zIndex: 10,
-    //     heightFactor: 2//2倍于默认高度，3D下有效
+    //     heightFactor: 2//2 倍于默认高度，3D 下有效
     // })
     let ts = this
     let a = ['实时路况', '路网', '卫星', '楼块']
@@ -2674,7 +2674,7 @@ class DemoAMap {
     if (opt.path && opt.path.length >= 3) {
       run(opt.path, opt)
     } else {
-      // 定位 开始点击 3个点
+      // 定位 开始点击 3 个点
       ts.map.on('click', clickHandler)
     }
 
@@ -2968,14 +2968,14 @@ class DemoAMap {
     return ts
   }
   // --------------------------------------------------------- 其他 ---------------------------------------------------------
-  // ip定位获取当前城市
+  // ip 定位获取当前城市
   ip(fn) {
     let ts = this
     AMap.plugin('AMap.CitySearch', function () {
       var citySearch = new AMap.CitySearch()
       citySearch.getLocalCity(function (status, result) {
         if (status === 'complete' && result.info === 'OK') {
-          // 查询成功，result即为当前所在城市信息
+          // 查询成功，result 即为当前所在城市信息
           fn ? fn(ts.code('', 1, {
             code: result.adcode,
             city: result.city,
@@ -3000,7 +3000,7 @@ class DemoAMap {
 
         geocoder.getAddress(v, function (status, result) {
           if (status === 'complete' && result.info === 'OK') {
-            // result为对应的地理位置详细信息
+            // result 为对应的地理位置详细信息
             let os = {
               address: result.regeocode.formattedAddress,
               detail: result.regeocode.addressComponent,
@@ -3032,14 +3032,14 @@ class DemoAMap {
     let ts = this
     let init = function (code) {
       var placeSearch = new AMap.PlaceSearch({
-        // city 指定搜索所在城市，支持传入格式有：城市名、citycode和adcode
+        // city 指定搜索所在城市，支持传入格式有：城市名、citycode 和 adcode
         city: code,
         pageSize: opt.limit || 10,
         pageIndex: opt.page || 1,
         citylimit: opt.citylimit || !1
       })
       placeSearch.search(opt.search, function (status, result) {
-        // 查询成功时，result即对应匹配的POI信息
+        // 查询成功时，result 即对应匹配的 POI 信息
         if (status === 'complete' && result.info === 'OK') {
           let c = result.poiList || {}
           let os = {

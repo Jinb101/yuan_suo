@@ -225,7 +225,7 @@ export default {
         toShow(key);
       }
     },
-    // 多个上传 noshow无效
+    // 多个上传 noshow 无效
     uploads(res, fn, name = "small", type = "img") {
       if (this.noapi && type === "img") {
         this.$emit("base64", res);
@@ -351,7 +351,7 @@ export default {
       console.log(res, "upload");
       let ts = this;
       if (res.type.startsWith('video/') && res.size > 499 * 1024 * 1024) {
-        this.$toast('文件大于500MB');
+        this.$toast('文件大于 500MB');
         return;
         // let newRes = ts.compressVideo(res);
       }
@@ -372,6 +372,7 @@ export default {
       );
     },
     exitToevent(eve, data, index, flag, num) {
+      console.log(data, index, flag, num);
       try {
         let ts = this;
         if (eve.num > 99) {

@@ -2,10 +2,14 @@
   <div class="det">
     <div class="header flex">
       <div class="cover">
-        <img :src="covrimg" class="db_image" alt="" style="object-fit: cover" />
+        <img :src="covrimg"
+             class="db_image"
+             alt=""
+             style="object-fit: cover" />
       </div>
       <div class="logo">
-        <v-a :src="child.base_map" :sex="child.gender === '男' ? 1 : 2"></v-a>
+        <v-a :src="child.base_map"
+             :sex="child.gender === '男' ? 1 : 2"></v-a>
       </div>
       <div class="text">
         <h2>
@@ -13,9 +17,8 @@
         </h2>
         <p>
           {{ child.class_name }}
-          <van-tag type="primary" size="large"
-            >家长{{ +det.state === 1 ? "未" : "已" }}读</van-tag
-          >
+          <van-tag type="primary"
+                   size="large">家长{{ +det.state === 1 ? "未" : "已" }}读</van-tag>
         </p>
       </div>
     </div>
@@ -32,39 +35,36 @@
       <h6>工作时间</h6>
       <div class="canvas flex">
         <div class="l">
-          <van-circle
-            v-model="canvaspeeed"
-            :rate="canvasnum"
-            :speed="100"
-            :text="canvastext"
-            :stroke-width="80"
-            layer-color="#ccc"
-          />
+          <van-circle v-model="canvaspeeed"
+                      :rate="canvasnum"
+                      :speed="100"
+                      :text="canvastext"
+                      :stroke-width="80"
+                      layer-color="#ccc" />
         </div>
         <div class="r">
-          <p><span></span>总计(工作时间)：{{ det.working_hours }}分钟</p>
+          <p><span></span>总计 (工作时间)：{{ det.working_hours }}分钟</p>
           <p><span class="c"></span>专注时间：{{ det.focus_time }}分钟</p>
         </div>
       </div>
       <h6>工作情况</h6>
       <p v-html="tohtml(det.work_situation)"></p>
-      <div class="images" v-if="image.length">
-        <div
-          class="image"
-          v-for="(x, y) in image"
-          :key="y"
-          @click="appShowImage(image, y, 'urls')"
-        >
+      <div class="images"
+           v-if="image.length">
+        <div class="image"
+             v-for="(x, y) in image"
+             :key="y"
+             @click="openViewImg(y)">
           <van-image :src="x.urls"></van-image>
         </div>
       </div>
       <div class="videos">
-        <div class="video" v-for="(x, y) in video" :key="y + '-2'">
-          <iframe
-            :src="tovideosrc(x.urls)"
-            class="db_image"
-            frameborder="0"
-          ></iframe>
+        <div class="video"
+             v-for="(x, y) in video"
+             :key="y + '-2'">
+          <iframe :src="tovideosrc(x.urls)"
+                  class="db_image"
+                  frameborder="0"></iframe>
         </div>
       </div>
       <h6>工作描述</h6>
@@ -76,28 +76,33 @@
       </div>
     </div>
     <div class="box tool_box flex">
-      <div class="btn_like" @click="onsaveshare">
-        <van-icon name="wechat" color="#1ee3b6" />
+      <div class="btn_like"
+           @click="onsaveshare">
+        <van-icon name="wechat"
+                  color="#1ee3b6" />
         <p>{{ det.shares }}</p>
       </div>
-      <div class="btn_like" @click="onsavelike">
-        <img :src="icons(+det.like_or_not === 1 ? 202 : 201)" alt="" />
+      <div class="btn_like"
+           @click="onsavelike">
+        <img :src="icons(+det.like_or_not === 1 ? 202 : 201)"
+             alt="" />
         <p>{{ det.like_count }}</p>
       </div>
     </div>
-    <div class="box" v-if="det.observe_id">
+    <div class="box"
+         v-if="det.observe_id">
       <van-divider>目前共{{ det.comments }}条评论</van-divider>
-      <v-page ref="page" @on-page="onPage">
+      <v-page ref="page"
+              @on-page="onPage">
         <van-empty v-if="!item.length"></van-empty>
         <ul>
-          <li
-            v-for="(i, j) in item"
-            :key="j"
-            class="flex van-hairline--bottom"
-            @click.stop="oncomments(i)"
-          >
+          <li v-for="(i, j) in item"
+              :key="j"
+              class="flex van-hairline--bottom"
+              @click.stop="oncomments(i)">
             <div class="logo">
-              <v-a :src="i.avatar" teacher></v-a>
+              <v-a :src="i.avatar"
+                   teacher></v-a>
             </div>
             <div class="text">
               <h3>{{ i.name }}</h3>
@@ -112,7 +117,9 @@
     </div>
     <div class="bottom_top"></div>
     <div class="bottom">
-      <v-c v-model="msg" @change="onsavecomment" unfocus></v-c>
+      <v-c v-model="msg"
+           @change="onsavecomment"
+           unfocus></v-c>
     </div>
   </div>
 </template>
@@ -177,6 +184,19 @@ export default {
     },
   },
   methods: {
+    openViewImg(index) {
+      console.log(index);
+      let url = this.det.working_moments.map((i) => {
+        if (i.type === 1) {
+          return i.urls
+        };
+      })
+      if (url.length > 0) {
+        this.appShowImage(
+          url, index, 'urls'
+        )
+      }
+    },
     onsaveshare() {
       this.$api.http(
         "contact40share",
@@ -239,6 +259,9 @@ export default {
       return demo.siteConfig.icon(num, "parent");
     },
     tohtml(e) {
+      if (!e) {
+        return ''
+      }
       let str = JSON.stringify(e);
       str = str.replace('"', "");
       str = str.substr(0, str.length - 1);
@@ -287,6 +310,7 @@ export default {
     box-sizing: border-box;
     position: relative;
     color: #fff;
+
     .cover {
       position: absolute;
       left: 0;
@@ -296,49 +320,59 @@ export default {
       z-index: 1;
       background-color: #38f;
     }
+
     .logo,
     .text {
       position: relative;
       z-index: 5;
     }
+
     .text {
       width: calc(100% - 50px);
       box-sizing: border-box;
       padding: 5px 10px;
+
       h2 {
         font-weight: 650;
         font-size: 16px;
         padding: 5px 0;
+
         b {
           padding-left: 5px;
           font-size: 14px;
           font-weight: 400;
         }
       }
+
       p {
         font-size: 14px;
       }
     }
   }
+
   .box {
     padding: 20px 15px 10px;
     background-color: #fff;
     margin-bottom: 10px;
     font-size: 14px;
+
     h6 {
       font-size: 15px;
       font-weight: 650;
       margin-bottom: 10px;
     }
-    > p {
+
+    >p {
       color: #999;
       padding-bottom: 10px;
       line-height: 1.8;
     }
+
     .c_time {
       color: #999;
       padding: 10px 0 0;
     }
+
     .tag {
       padding: 5px 10px;
       color: #fff;
@@ -346,10 +380,12 @@ export default {
       margin-bottom: 10px;
     }
   }
+
   .images,
   .videos {
     margin-bottom: 10px;
   }
+
   .video {
     height: 195px;
     width: 100%;
@@ -357,22 +393,27 @@ export default {
     overflow: hidden;
     border-radius: 5px;
     color: #fff;
-    & + .video {
+
+    &+.video {
       margin-top: 10px;
     }
   }
+
   .canvas {
     padding: 10px 0;
     height: 160px;
     align-items: center;
+
     .l {
       flex: 1;
       text-align: center;
     }
+
     .r {
       line-height: 20px;
       font-size: 14px;
       padding-left: 30px;
+
       span {
         display: inline-block;
         vertical-align: middle;
@@ -381,19 +422,23 @@ export default {
         border-radius: 5px;
         margin-right: 4px;
         background-color: #ccc;
+
         &.c {
           background-color: #1989fa;
         }
       }
-      p + p {
+
+      p+p {
         margin-top: 5px;
       }
     }
   }
+
   .tool_box {
     // align-items: center;
     justify-content: center;
   }
+
   .btn_like {
     width: 60px;
     height: 60px;
@@ -408,22 +453,27 @@ export default {
     color: #666;
     background-color: #f8f7fa;
     font-weight: 650;
+
     img {
       width: 25px;
       height: 25px;
       display: block;
       margin-bottom: 5px;
     }
+
     .van-icon {
       font-size: 25px;
     }
-    & + .btn_like {
+
+    &+.btn_like {
       margin-left: 15px;
     }
   }
+
   .bottom_top {
     height: 100px;
   }
+
   .bottom {
     position: fixed;
     bottom: 0;
@@ -433,20 +483,25 @@ export default {
     background: #fff;
     z-index: 99;
   }
+
   li {
     padding: 10px 0;
     position: relative;
+
     .logo {
       width: 50px;
       margin-right: 10px;
       height: 50px;
     }
+
     .text {
       width: calc(100% - 60px);
+
       h3 {
         font-weight: 650;
         padding: 5px 0;
       }
+
       p {
         color: #999;
       }
