@@ -1,16 +1,19 @@
 <template>
-  <v-view header overflow :back="$frameview" @on-back="appOnBackOld">
+  <v-view header
+          overflow
+          :back="$frameview"
+          @on-back="appOnBackOld">
     <div class="flex approval">
       <div class="box">
         <h6 class="bgc_green">发起审批</h6>
         <div class="a_view flex fw">
-          <section v-for="(i, j) in bar" :key="j" @click="onDetail(i, 1, j)">
+          <section v-for="(i, j) in bar"
+                   :key="j"
+                   @click="onDetail(i, 1, j)">
             <div class="avatar">
-              <van-image
-                fit="cover"
-                class="db_image"
-                :src="$js.config.icon(i.icon, 'index')"
-              ></van-image>
+              <van-image fit="cover"
+                         class="db_image"
+                         :src="$js.config.icon(i.icon, 'index')"></van-image>
             </div>
             <template v-if="i.num > 0">
               <van-badge :content="i.num">
@@ -26,17 +29,13 @@
       <div class="box">
         <h6 class="bgc_warning">我的审批</h6>
         <div class="a_view flex fw">
-          <section
-            v-for="(i, j) in bar2"
-            :key="j + 100"
-            @click="onDetail(i, 2, j)"
-          >
+          <section v-for="(i, j) in bar2"
+                   :key="j + 100"
+                   @click="onDetail(i, 2, j)">
             <div class="avatar">
-              <van-image
-                fit="cover"
-                class="db_image"
-                :src="$js.config.icon(i.icon, 'index')"
-              ></van-image>
+              <van-image fit="cover"
+                         class="db_image"
+                         :src="$js.config.icon(i.icon, 'index')"></van-image>
             </div>
             <template v-if="i.num > 0">
               <van-badge :content="i.num">
@@ -107,12 +106,17 @@ export default {
 .approval {
   flex-direction: column;
   height: 100%;
+  width: 100%;
   overflow-y: scroll;
+
   .box {
+    height: 50%;
+    width: 100%;
     flex: 1;
     box-sizing: border-box;
     padding: 10px;
   }
+
   h6 {
     font-size: 16px;
     font-weight: 700;
@@ -123,30 +127,34 @@ export default {
     color: #fff;
     border-radius: 5px;
   }
+
   .a_view {
     height: calc(100% - 30px);
     box-sizing: border-box;
-    padding: 20px 0;
+    padding: 0 0 .4rem 0;
+
     section {
-      width: 108px;
+      width: calc(33.33% - 14px);
       margin-right: 14px;
       box-sizing: border-box;
-      padding: 10px;
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100px;
+      height: 2.6rem;
       background-color: rgba(232, 255, 250, 0.1);
       border-radius: 5px;
+
       &:nth-child(3n) {
         margin-right: 0;
       }
+
       .avatar {
-        height: 44px;
-        width: 44px;
+        height: 1rem;
+        width: 1rem;
         margin-bottom: 6px;
       }
+
       p {
         line-height: 14px;
         font-weight: 650;

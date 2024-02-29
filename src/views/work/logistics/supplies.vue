@@ -31,8 +31,8 @@
           <h6>{{ i.name }}</h6>
           <p>编号：{{ i.no }}</p>
           <p>剩余数量：{{ i.num }} {{ i.unit_name }}</p>
-          <p>待出库:{{i.pending_approval}} {{ i.unit_name }}</p>
-          <p>审批中:{{i.to_be_shipped_out}} {{ i.unit_name }}</p>
+          <p>待出库:{{i.to_be_shipped_out}} {{ i.unit_name }}</p>
+          <p>审批中:{{i.pending_approval}} {{ i.unit_name }}</p>
         </div>
         <div class="btns">
           <span @click.stop="onedit(i, j)">编辑</span>
@@ -51,7 +51,7 @@
       <transition name="van-fade">
         <div class="save_btn" v-if="cid.length">
           <van-button block :color="$js.btnColor" round @click="ongoto"
-            >批量领用({{ cid.length }})项</van-button
+            >批量领用 ({{ cid.length }}) 项</van-button
           >
         </div>
       </transition>

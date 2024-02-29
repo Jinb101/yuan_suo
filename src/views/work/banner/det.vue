@@ -2,7 +2,8 @@
   <div class="det_banner">
     <h6>{{ ext.describe }}</h6>
     <p class="time">发表时间：{{ appTimeout(ext.create_time, true) }}</p>
-    <div class="app_frame_content" v-html="ext.content"></div>
+    <div class="app_frame_content"
+         v-html="ext.content"></div>
   </div>
 </template>
 
@@ -41,11 +42,12 @@ export default {
 </script>
 <style lang='less' scoped>
 .det_banner {
-  > h6 {
+  >h6 {
     padding: 8px 10px;
     font-weight: 650;
   }
-  > p {
+
+  >p {
     font-size: 12px;
     color: #ccc;
     padding: 5px 10px;

@@ -1,27 +1,23 @@
 <template>
   <div class="answer">
-    <van-field
-      v-model="content"
-      rows="3"
-      autosize
-      label="留言"
-      type="textarea"
-      maxlength="500"
-      placeholder="请输入留言"
-      show-word-limit
-      label-width="3em"
-    />
+    <van-field v-model="content"
+               rows="3"
+               autosize
+               label="留言"
+               type="textarea"
+               maxlength="500"
+               placeholder="请输入留言"
+               show-word-limit
+               label-width="3em" />
     <x-content>
       <h6>图片</h6>
       <v-uploads v-model="image">
         <div class="ans_image">
-          <v-upload
-            more
-            moreLength="9"
-            @on-path="onanswerimage"
-            @on-loading="onanswerimage"
-            :ids="'upload-image-' + idr"
-          ></v-upload>
+          <v-upload more
+                    moreLength="9"
+                    @on-path="onanswerimage"
+                    @on-loading="onanswerimage"
+                    :ids="'upload-image-' + idr"></v-upload>
         </div>
       </v-uploads>
     </x-content>
@@ -29,21 +25,21 @@
       <h6>附件</h6>
       <v-uploads v-model="files">
         <div class="ans_image">
-          <v-upload
-            more
-            moreLength="9"
-            @on-path="onanswerfile"
-            @on-loading="onanswerfile"
-            :ids="'upload-file-' + idr"
-            type="all"
-          ></v-upload>
+          <v-upload more
+                    moreLength="9"
+                    @on-path="onanswerfile"
+                    @on-loading="onanswerfile"
+                    :ids="'upload-file-' + idr"
+                    type="all"></v-upload>
         </div>
       </v-uploads>
     </x-content>
     <div class="btn">
-      <van-button block round type="primary" @click="save">{{
-        savebtn
-      }}</van-button>
+      <van-button round
+                  type="primary"
+                  @click="save">{{
+                    savebtn
+                  }}</van-button>
     </div>
   </div>
 </template>
@@ -157,16 +153,38 @@ export default {
 };
 </script>
 <style lang='less' scoped>
+.answer {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  padding-bottom: 20%;
+  position: relative;
+}
+
 .ans_image {
   width: 95px;
   height: 95px;
   margin: 0 8px 8px 0;
 }
+
 h6 {
   font-size: 15px;
   padding: 8px;
 }
+
 .btn {
-  margin: 10px 20%;
+  margin-top: .6rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 50px;
+  z-index: 1000;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 </style>

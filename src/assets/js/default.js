@@ -258,7 +258,7 @@ let works = {
       ['work_grow', '成长任务', icons(30, 'n', 206), 422, { ...wobj, id: 20305 }],
       ['work_album', '学期相册', icons(31, 'n', 207), 430, { ...wobj, menulevel: 1004, id: 20306 }],
       ['work_leave', '请假审批', icons(208, 'n', 208), 466, { ...wobj, id: 20307 }],
-      ['work_style', '班级风采', icons(208, 'n', 208), 466, { ...wobj, id: 20308 }],
+      ['work_style', '班级风采', icons(31, 'n', 207), 467, { ...wobj, id: 20308 }],
       ['work_chant', '国学', icons(0, 'n', 7004), 802, { ...wobj, id: 20308 }],
       ['vote2', '投票系统', icons(0, 'n', 7024), 803, { ...wobj, id: 20309 }],
     ]),

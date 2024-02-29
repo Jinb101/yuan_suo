@@ -1,12 +1,9 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue'
-import App from './App'
+import 'vant/lib/index.css';
 import vueRouter from 'vue-router'
-import router from './router'
 import Title from 'vue-wechat-title'
 import store from './store/index'
-
+import Vue from 'vue'
+import App from './App'
 import {
   Icon, Tabbar, TabbarItem, Image, Badge, Circle, Field, Button, Radio, Checkbox, Tab, Tabs, PullRefresh, List,
   Empty, CheckboxGroup, ImagePreview, RadioGroup, Search, Divider, Lazyload, Tag, Popup, DatetimePicker, Collapse,
@@ -21,8 +18,7 @@ import {
 
 import 'amfe-flexible';
 import '@vant/touch-emulator';
-import "tailwindcss/tailwind.css";
-import "./style.less";
+// import "tailwindcss/tailwind.css";
 
 // import vToolScroll from 'com/scroll/better_scroll.vue'
 import vView from './views/public/view.vue'
@@ -39,6 +35,8 @@ import $api from 'public/api/api.js'
 import $js from 'public/js/const.js'
 import $vx from 'public/js/vx.js'
 import * as seleApi from '../src/assets/api/selfApi.js'
+import router from './router'
+
 // import $model from 'public/js/model.js'
 
 Vue.config.productionTip = false

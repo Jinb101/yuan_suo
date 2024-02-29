@@ -50,9 +50,9 @@
     <van-field label="生源类型" readonly label-width="5em" required>
       <template #button>
         <van-radio-group v-model="val.source_type" direction="horizontal">
-          <van-radio name="1">A类</van-radio>
-          <van-radio name="2">B类</van-radio>
-          <van-radio name="3">C类</van-radio>
+          <van-radio name="1">A 类</van-radio>
+          <van-radio name="2">B 类</van-radio>
+          <van-radio name="3">C 类</van-radio>
         </van-radio-group>
       </template>
     </van-field>

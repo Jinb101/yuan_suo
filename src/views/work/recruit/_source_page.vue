@@ -14,7 +14,29 @@
                   :item="toTag(i, j)"
                   @change="onTagChange"></v-more>
         </div>
-        <div class="btn">
+
+        <div class=" text_header">
+          <div>
+            <span class="text_name"> {{ i.name }}</span>
+            <span class="col_primary"
+                  @click.stop="onTagChange({ ext: i, type: 'label', index: j })">(备注)</span>
+          </div>
+          <div class=" text_box">
+            <div>出生日期：{{ i.birthday }}</div>
+            <div>联系方式：{{ i.contact }}</div>
+            <div>联系地址：{{ i.address || "测试" }}</div>
+            <div>
+              录入者：{{ appTimeout(i.entry_time) }}由<b class="col_green">{{
+                i.staff_name || "管理员"
+              }}</b>录入
+            </div>
+            <div v-if="i.remarks && i.remarks.length">
+              最新备注：{{ i.remarks[0].content }}
+              <b v-if="i.remarks[0].picture">[图片]</b>
+            </div>
+          </div>
+        </div>
+        <div class="text_btn">
           <van-button size="small"
                       round
                       @click.stop="onTagChange({ ext: i, type: 'classes', index: j })"
@@ -28,23 +50,6 @@
             点击入学
           </van-button>
         </div>
-        <h6>
-          {{ i.name }}
-          <span class="col_primary"
-                @click.stop="onTagChange({ ext: i, type: 'label', index: j })">(备注)</span>
-        </h6>
-        <p>出生日期：{{ i.birthday }}</p>
-        <p>联系方式：{{ i.contact }}</p>
-        <p>联系地址：{{ i.address || "测试" }}</p>
-        <p>
-          录入者：{{ appTimeout(i.entry_time) }}由<b class="col_green">{{
-            i.staff_name || "管理员"
-          }}</b>录入
-        </p>
-        <p v-if="i.remarks && i.remarks.length">
-          最新备注：{{ i.remarks[0].content }}
-          <b v-if="i.remarks[0].picture">[图片]</b>
-        </p>
       </div>
     </section>
   </div>
@@ -103,7 +108,8 @@ export default {
   },
 };
 </script>
-<style lang='less' scoped>
+
+<style scoped lang='less' >
 section {
   padding: 10px;
   background-color: rgba(188, 241, 245, 0.3);
@@ -127,6 +133,9 @@ section {
     position: relative;
     padding-top: 5px;
     color: #999;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
 
     .status {
       position: absolute;
@@ -141,43 +150,69 @@ section {
       }
     }
 
-    h6 {
-      font-weight: 650;
-      line-height: 20px;
-      margin-bottom: 5px;
-      font-size: 15px;
-      color: #666;
+    .text_header {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: flex-start;
 
-      span {
-        font-size: 13px;
-        font-weight: 400;
-        padding-left: 10px;
+      .text_name {
+        font-size: 15px;
+        font-weight: 650;
+        color: #666;
       }
+
+      .text_box {
+        div {
+          margin-top: 6px;
+        }
+      }
+
+      // h6 {
+      //   font-weight: 650;
+      //   line-height: 20px;
+      //   margin-bottom: 5px;
+      //   font-size: 15px;
+      //   color: #666;
+
+      //   span {
+      //     font-size: 13px;
+      //     font-weight: 400;
+      //     padding-left: 10px;
+      //   }
+      // }
+
+      // span {
+      //   margin-top: 5px;
+      //   font-size: 13px;
+      //   font-weight: 400;
+      // }
+
+      // p+p {
+      //   margin-top: 5px;
+      // }
+
+      // p {
+      //   line-height: 1.2;
+
+      //   b {
+      //     padding: 0 5px;
+      //   }
+      // }
     }
 
-    p+p {
-      margin-top: 5px;
-    }
+    .text_btn {
+      height: 100%;
+      margin: auto 0;
 
-    p {
-      line-height: 1.2;
-
-      b {
-        padding: 0 5px;
+      .van-button {
+        margin-top: 5px;
+        background-color: transparent;
+        border-color: #38f;
+        min-width: 60px;
       }
     }
   }
 
-  .btn {
-    position: absolute;
-    right: 8px;
-    top: 30px;
-
-    .van-button {
-      background-color: transparent;
-      border-color: #38f;
-      min-width: 60px;
-    }
-  }
 }
 </style>

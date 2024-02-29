@@ -1,28 +1,31 @@
 <template>
-  <v-view header text="发通知" @on-user="onview">
-    <van-field
-      v-model="title"
-      label="标题"
-      placeholder="请输入通知标题"
-      maxlength="50"
-      label-width="3em"
-      required
-    />
-    <van-field
-      v-model="desc"
-      rows="2"
-      autosize
-      label="内容"
-      type="textarea"
-      label-width="3em"
-      placeholder="请输入通知内容"
-      maxlength="600"
-      show-word-limit
-      required
-    />
-    <van-field label="发送给员工" label-width="6em" readonly v-if="!unboss">
+  <v-view header
+          text="发通知"
+          @on-user="onview">
+    <van-field v-model="title"
+               label="标题"
+               placeholder="请输入通知标题"
+               maxlength="50"
+               label-width="3em"
+               required />
+    <van-field v-model="desc"
+               rows="2"
+               autosize
+               label="内容"
+               type="textarea"
+               label-width="3em"
+               style="white-space: pre-wrap"
+               placeholder="请输入通知内容"
+               maxlength="600"
+               show-word-limit
+               required />
+    <van-field label="发送给员工"
+               label-width="6em"
+               readonly
+               v-if="!unboss">
       <template #button>
-        <van-radio-group v-model="staff" direction="horizontal">
+        <van-radio-group v-model="staff"
+                         direction="horizontal">
           <van-radio name="all">全部</van-radio>
           <van-radio name="2">选择</van-radio>
           <van-radio name="3">无</van-radio>
@@ -30,17 +33,18 @@
       </template>
     </van-field>
     <transition name="van-fade">
-      <v-people
-        api
-        type="staffs"
-        v-model="allStaff"
-        v-if="staff === '2'"
-        open
-      ></v-people>
+      <v-people api
+                type="staffs"
+                v-model="allStaff"
+                v-if="staff === '2'"
+                open></v-people>
     </transition>
-    <van-field label="发送给家长" label-width="6em" readonly>
+    <van-field label="发送给家长"
+               label-width="6em"
+               readonly>
       <template #button>
-        <van-radio-group v-model="parent" direction="horizontal">
+        <van-radio-group v-model="parent"
+                         direction="horizontal">
           <van-radio name="all">全部</van-radio>
           <van-radio name="2">选择</van-radio>
           <van-radio name="3">无</van-radio>
@@ -48,17 +52,18 @@
       </template>
     </van-field>
     <transition name="van-fade">
-      <v-people
-        api
-        type="parents"
-        v-model="allPeople"
-        v-if="parent === '2'"
-        open
-      ></v-people>
+      <v-people api
+                type="parents"
+                v-model="allPeople"
+                v-if="parent === '2'"
+                open></v-people>
     </transition>
-    <van-field label="签名" label-width="6em" readonly>
+    <van-field label="签名"
+               label-width="6em"
+               readonly>
       <template #button>
-        <van-radio-group v-model="write" direction="horizontal">
+        <van-radio-group v-model="write"
+                         direction="horizontal">
           <van-radio name="1">是</van-radio>
           <van-radio name="0">否</van-radio>
         </van-radio-group>
@@ -68,11 +73,9 @@
     <x-content>
       <v-uploads v-model="image">
         <div class="image">
-          <v-upload
-            more
-            @on-loading="onImageLoading"
-            @on-path="onImagePath"
-          ></v-upload>
+          <v-upload more
+                    @on-loading="onImageLoading"
+                    @on-path="onImagePath"></v-upload>
         </div>
       </v-uploads>
     </x-content>
@@ -80,21 +83,20 @@
     <x-content>
       <v-uploads v-model="list">
         <div class="image">
-          <v-upload
-            ids="a1"
-            more
-            @on-loading="onTextLoading"
-            @on-path="onTextPath"
-            type="text"
-          ></v-upload>
+          <v-upload ids="a1"
+                    more
+                    @on-loading="onTextLoading"
+                    @on-path="onTextPath"
+                    type="text"></v-upload>
         </div>
       </v-uploads>
     </x-content>
     <x-content>
       <div class="btns">
-        <van-button block round :color="$js.btnColor" @click="onSubmit"
-          >发送通知</van-button
-        >
+        <van-button block
+                    round
+                    :color="$js.btnColor"
+                    @click="onSubmit">发送通知</van-button>
       </div>
     </x-content>
   </v-view>
@@ -172,6 +174,7 @@ export default {
     },
     // 发送通知
     onSubmit() {
+      console.log(this.desc);
       if (!this.title) return this.$js.message("请输入标题");
       if (!this.desc) return this.$js.message("请输入发送内容");
       let os = {
@@ -182,14 +185,14 @@ export default {
           this.staff === "all"
             ? "all"
             : this.staff === "3"
-            ? ""
-            : this.allStaff.map((s) => s.id).join(","),
+              ? ""
+              : this.allStaff.map((s) => s.id).join(","),
         parent_id:
           this.parent === "all"
             ? "all"
             : this.parent === "3"
-            ? ""
-            : this.allPeople.map((s) => s.id).join(","),
+              ? ""
+              : this.allPeople.map((s) => s.id).join(","),
         file: this.list
           .map((s) => s.src)
           .filter((s) => !!s)
@@ -217,6 +220,7 @@ export default {
   width: 100px;
   height: 100px;
 }
+
 .btns {
   padding: 30px 10%;
 }

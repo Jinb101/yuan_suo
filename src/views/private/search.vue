@@ -1,18 +1,17 @@
 <template>
   <div class="search">
-    <van-search
-      v-model="name"
-      :placeholder="plac"
-      @input="onSearchOnce"
-      @search="onSearch"
-      show-action
-      shape="round"
-      :background="bgc"
-      :autofocus="focus"
-      @clear="onclear"
-    >
+    <van-search v-model="name"
+                :placeholder="plac"
+                @input="onSearchOnce"
+                @search="onSearch"
+                show-action
+                shape="round"
+                :background="bgc"
+                :autofocus="focus"
+                @clear="onclear">
       <template #action>
-        <div @click="onSearch" class="btn">{{ text }}</div>
+        <div @click="onSearch"
+             class="btn">{{ text }}</div>
       </template>
     </van-search>
   </div>
@@ -93,7 +92,18 @@ export default {
 };
 </script>
 <style lang='less' scoped>
-.btn {
-  padding: 0 10px;
+.search {
+  width: 100%;
+  display: flex;
+
+  .van-search {
+    width: 100%;
+  }
+
+  .btn {
+    width: auto;
+    min-width: 40px;
+    padding: 0 10px;
+  }
 }
 </style>

@@ -76,7 +76,6 @@ export default {
     },
     onImagePath(e, v) {
       this.pio = v;
-      console.log(e, v);
     },
     onSub() {
       let curUrl = ''
@@ -108,7 +107,7 @@ export default {
         this.$toast('发布成功')
         this.vio = {}
         this.pio = []
-        // 无感刷新
+        this.$router.go(-1)
       }).catch(err => {
         console.log(err);
       })

@@ -516,7 +516,7 @@ export default {
     this.id = this.$route.params.id || "0";
     let did = this.$route.params.did || "";
     this.child = this.$route.params.child || "";
-    // 若等于max 显示 分页数据 反之显示 详情页
+    // 若等于 max 显示 分页数据 反之显示 详情页
     this.detailid = did === "max" ? "" : did;
     this.menu = bar[1];
     if (this.active === "") {

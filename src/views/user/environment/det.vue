@@ -32,7 +32,7 @@
           <van-image :src="like"></van-image>
         </div>
         <p>
-          <template v-if="+detail.likes_count === 0"> 为Ta点赞 </template>
+          <template v-if="+detail.likes_count === 0"> 为 Ta 点赞 </template>
           <template v-else> 取消点赞 </template>
           ({{ detail.likes }})
         </p>

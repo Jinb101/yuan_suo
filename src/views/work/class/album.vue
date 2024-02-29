@@ -1,7 +1,9 @@
 <template>
-  <v-view header :text="childid ? '宝贝相册' : ''">
+  <v-view header
+          :text="childid ? '宝贝相册' : ''">
     <template #menu>
-      <span v-if="childid" @click="open = true">更换宝宝</span>
+      <span v-if="childid"
+            @click="open = true">更换宝宝</span>
     </template>
     <template v-if="childid">
       <!-- <div class="app_top">
@@ -12,76 +14,84 @@
           :value="yeartext"
         ></van-cell>
       </div> -->
-      <v-page ref="page" @on-page="onPage">
+      <v-page ref="page"
+              @on-page="onPage">
         <van-empty v-if="!item.length"></van-empty>
-        <section v-for="(i, j) in item" :key="j">
-          <van-cell
-            :title="i.time"
-            :value="i.age"
-            @click="onedit(i)"
-          ></van-cell>
+        <section v-for="(i, j) in item"
+                 :key="j">
+          <van-cell :title="i.time"
+                    :value="i.age"
+                    @click="onedit(i)"></van-cell>
           <div class="list">
-            <div class="i" v-for="(x, y) in i.list" :key="y + '-' + j">
-              <span class="close" @click.stop="ondelimgs(y, j)"
-                ><van-icon name="cross"></van-icon
-              ></span>
-              <van-image
-                :src="x.picture"
-                fit="cover"
-                @click.stop="appShowImage(i.list, y, 'picture')"
-              ></van-image>
+            <div class="i"
+                 v-for="(x, y) in i.list"
+                 :key="y + '-' + j">
+              <span class="close"
+                    @click.stop="ondelimgs(y, j)"><van-icon name="cross"></van-icon></span>
+              <van-image :src="x.picture"
+                         fit="cover"
+                         @click.stop="
+                           openImg(i.list, y, 'picture')
+                           "></van-image>
             </div>
           </div>
         </section>
       </v-page>
-      <div class="app_btn_add b20" @click="open1 = true">
+      <div class="app_btn_add b20"
+           @click="open1 = true">
         <div class="add_cover"><van-icon name="plus" /></div>
         <p>添加</p>
       </div>
     </template>
     <template v-else>
       <van-empty description="请先选择宝宝">
-        <van-button
-          :color="$js.btnColor"
-          @click="open = true"
-          round
-          block
-          size="small"
-          class="a_btn"
-          >点击选择宝宝</van-button
-        >
+        <van-button :color="$js.btnColor"
+                    @click="open = true"
+                    round
+                    block
+                    size="small"
+                    class="a_btn">点击选择宝宝</van-button>
       </van-empty>
     </template>
     <template #fixed>
-      <v-f v-model="open" :footer="false" cover text="选择宝宝">
+      <v-f v-model="open"
+           :footer="false"
+           cover
+           text="选择宝宝">
         <template #menu>
           <v-cs v-model="cls"></v-cs>
         </template>
-        <v-c
-          :cid="cls.id + ''"
-          v-model="childid"
-          @change="onchangechild"
-          @list="onlistchild"
-        ></v-c>
+        <v-c :cid="cls.id + ''"
+             v-model="childid"
+             @change="onchangechild"
+             @list="onlistchild"></v-c>
         <div class="w80">
-          <van-button block round :color="$js.btnColor" @click="open3 = true"
-            >添加相册/自动识别</van-button
-          >
+          <van-button block
+                      round
+                      :color="$js.btnColor"
+                      @click="open3 = true">添加相册/自动识别</van-button>
         </div>
       </v-f>
-      <v-f v-model="open1" :footer="false" :text="ext1.$edit ? '编辑' : '发布'">
-        <v-a
-          :ext="ext1"
-          :cid="childid"
-          @end="onPage(1)"
-          :list="childitem"
-        ></v-a>
+      <v-f v-model="open1"
+           :footer="false"
+           :text="ext1.$edit ? '编辑' : '发布'">
+        <v-a :ext="ext1"
+             :cid="childid"
+             @end="onPage(1)"
+             :list="childitem"></v-a>
       </v-f>
-      <v-f v-model="open2" :footer="false" text="选择学期">
-        <v-y v-model="ext2" @change="onPage(1)"></v-y>
+      <v-f v-model="open2"
+           :footer="false"
+           text="选择学期">
+        <v-y v-model="ext2"
+             @change="onPage(1)"></v-y>
       </v-f>
-      <v-f v-model="open3" :footer="false" text="添加至相册">
-        <v-a :cid="cls.id" :api="false" @sub="onsuball"></v-a>
+      <v-f v-model="open3"
+           :footer="false"
+           text="添加至相册">
+        <v-a :cid="cls.id"
+             :api="false"
+             @sub="onsuball"></v-a>
       </v-f>
     </template>
   </v-view>
@@ -140,6 +150,14 @@ export default {
   inject: ["appPath", "appShowImage"],
   components: { vF, vC, vCs, vA, vY },
   methods: {
+    openImg(i, y, type) {
+      console.log(i);
+      let list = i.map((r) => {
+        return r.picture;
+      });
+      console.log(list);
+      this.appShowImage(list, y, type)
+    },
     onsuball(e) {
       this.$api.http("albumadds", e, () => {
         this.open3 = false;
@@ -218,6 +236,7 @@ export default {
             k.src = "/uploads/" + index;
             return k;
           });
+          console.log(list);
           let os = {
             time: s.years,
             age: s.age,
@@ -248,19 +267,23 @@ export default {
 .a_btn {
   min-width: 100px;
 }
+
 section {
   margin: 8px 8px 0;
   box-sizing: border-box;
   position: relative;
   font-size: 15px;
+
   .van-cell {
     background: transparent;
   }
+
   .list {
     padding: 15px 0;
     display: flex;
     flex-wrap: wrap;
     position: relative;
+
     .i {
       width: 119px;
       height: 119px;
@@ -268,6 +291,7 @@ section {
       padding: 1px;
       position: relative;
     }
+
     .close {
       position: absolute;
       right: 1px;

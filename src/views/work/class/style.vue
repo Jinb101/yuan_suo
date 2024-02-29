@@ -12,14 +12,18 @@
                           shape="square">
         <van-tabs v-model="active">
           <van-tab title="相处">
-            <div v-for="img in list"
-                 :key="img.class_style_id"
-                 class=" imgs">
-              <img :src="img.picture"
-                   alt="">
-              <div
-                   style=" height: 100%; width: 40%; display: flex; justify-content: end; align-items: center;padding-right: 1em;">
-                <van-checkbox :name="img"></van-checkbox>
+            <van-empty v-if="list.length === 0"
+                       description="图片为空" />
+            <div v-else>
+              <div v-for="img in list"
+                   :key="img.class_style_id"
+                   class=" imgs">
+                <img :src="img.picture"
+                     alt="">
+                <div
+                     style=" height: 100%; width: 40%; display: flex; justify-content: end; align-items: center;padding-right: 1em;">
+                  <van-checkbox :name="img"></van-checkbox>
+                </div>
               </div>
             </div>
           </van-tab>
@@ -28,13 +32,15 @@
                  v-if="videoData.length > 0">
               <VidePlay :src="videoSrc"></VidePlay>
             </div>
+            <van-empty v-else
+                       description="请上传视频" />
           </van-tab>
         </van-tabs>
       </van-checkbox-group>
-      <div class=" btn"
-           v-if="active === 0">
+      <div class=" _style_btn ">
         <van-button :disabled="checked.length === 0"
                     plain
+                    v-if="active === 0"
                     @click="delStyle"
                     type="warning"
                     round>删除</van-button>
@@ -87,10 +93,11 @@ export default {
       try {
         this.$js.modeldel(() => {
           const classStyleIds = this.checked.map((item) => item.class_style_id).join(',');
-
           seleApi.post('delClassEle', { class_id: this.cls.id, class_style_id: classStyleIds });
           this.$toast("删除成功");
-        }, '相处图片');
+          this.list = this.list.filter((item) => !this.checked.includes(item));
+          this.checked = [];
+        }, '相册图片');
       } catch (error) {
 
       }
@@ -101,7 +108,7 @@ export default {
 };
 
 </script>
-<style lang="less" scope>
+<style scope >
 .page {
   height: 90%;
   width: 100%;
@@ -123,7 +130,7 @@ export default {
   }
 }
 
-.btn {
+._style_btn {
   position: absolute;
   width: 100%;
   height: 10%;

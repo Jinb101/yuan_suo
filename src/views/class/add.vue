@@ -231,7 +231,12 @@ export default {
       this.is_change_class = e.is_whether === 1;
     },
     onSub() {
-      // console.log(this.class_ids);
+      if (!this.pio.length && this.text === '' && +this.radio === 1) {
+        return this.$toast("请编辑图片或文字");
+      }
+      if (this.radio === "2" && !this.vio.src && this.text === "") {
+        return this.$toast("请上传视频");
+      }
       let os = {
         type: this.radio,
         content: this.text.replace(/<p>&nbsp;<\/p>\n<p>&nbsp;<\/p>\n/g, "\n"),
@@ -243,12 +248,21 @@ export default {
           .join(","),
       };
       if (+this.radio === 1) {
+        if (this.pio.length === 0 || !this.pio.length) {
+          os.imgs = [];
+        } else {
+          os.imgs = this.pio
+            .map((s) => {
+              return s.src;
+            })
+            .join(",");
+        }
         // image
-        os.imgs = this.pio
-          .map((s) => {
-            return s.src;
-          })
-          .join(",");
+        // os.imgs = this.pio
+        //   .map((s) => {
+        //     return s.src;
+        //   })
+        //   .join(",");
       } else {
         // video
         os.imgs = this.vio.src || "";
@@ -256,7 +270,9 @@ export default {
       }
       this.$api.http("classadd", os, () => {
         this.$toast("添加成功");
-        this.tinymce.setContent("");
+        if (this.tinymce) {
+          this.tinymce.setContent("");
+        }
         // eslint-disable-next-line
         demo.$local.set("class-add-teacher", this.allPeople);
         // eslint-disable-next-line no-undef
@@ -265,9 +281,11 @@ export default {
           // eslint-disable-next-line no-undef
           demo.$local.clear('PioImgList')
         }
+        this.pio = [];
+        this.vio = {};
         // eslint-disable-next-line
         demo.siteConfig.tempdata("class", null, "clear");
-        this.$router.back();
+        this.$router.go(-1);
       });
       this.open = false;
     },

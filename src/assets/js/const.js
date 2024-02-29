@@ -12,7 +12,7 @@ let api = {
 let env = process.env.NODE_ENV === 'development'
 
 if (env) {
-  api.http = '/env/'
+  api.http = '/api/'
 }
 
 if (window.LINKTOAPIWWW) {

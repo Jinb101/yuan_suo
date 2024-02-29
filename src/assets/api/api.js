@@ -5,7 +5,7 @@ import route from "../../router/index";
 import Tools from "../../utils/index";
 // import citys from '../../../static/js/e.json'
 import { Toast, Dialog } from "vant";
-import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg/dist/ffmpeg.min.js";
+// import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg/dist/ffmpeg.min.js";
 import seleHttp from './selfApi'
 /* eslint-disable */
 
@@ -17,10 +17,6 @@ let citys = [];
 let loadupload = null;
 let loaduploadstatus = false;
 
-const ffmpeg = createFFmpeg({
-  corePath: "/static/js/ffmpeg-core.js",
-  log: false
-});
 
 
 // 分片
@@ -58,84 +54,87 @@ function splitFile(file, size) {
   });
 }
 
-async function compressVideo(inputFile, length, index,name) {
-  if (!ffmpeg.isLoaded()) {
-    await ffmpeg.load();
-  }
-  console.log(inputFile);
-  return new Promise(async (resolve, reject) => {
-    const inputFileName = inputFile.name;
-    // Write the input video file to FS
-    ffmpeg.FS("writeFile", "input.mp4", new Uint8Array(await inputFile.arrayBuffer()));
-    console.log(123);
-    ffmpeg.setProgress(async ({ ratio }) => {
-      const progress = (ratio * 100.0).toFixed();
-      console.log(progress);
-      if (progress !== "100" && progress >= "0") {
-        Toast.loading({
-          duration: 0,
-          message: `压缩中 \n ${progress}%`,
-          forbidClick: true
-        });
-      } else if (progress === "100") {
-        // Call the next compression function
-        // if (index < length - 1) {
-        //   await compressVideo(fileChunks[index + 1], length, index + 1);
-        // }
-      }
-    });
+// async function compressVideo(inputFile, length, index,name) {
+//   const ffmpeg = createFFmpeg({
+//     corePath: "/static/js/ffmpeg-core.js",
+//     log: false
+//   });
 
-    const args = [
-      "-i",
-      "input.mp4",
-      "-c:v",
-      "libx264",
-      "-b",
-      "2000k",
-      "-preset",
-      "ultrafast",
-      "output.mp4"
-    ];
-    await ffmpeg.run(...args);
-            // Record the start time of compression
-            const startTime = performance.now();
 
-            // Calculate compression time
-            const endTime = performance.now();
-            const compressTime = ((endTime - startTime) / 1000).toFixed(2);
-            console.log(`Compression time: ${compressTime} seconds`);
 
-            // Read the compressed video file from FS
-            const data = ffmpeg.FS("readFile", "output.mp4");
-            const compressedVideoBlob = new Blob([data.buffer], { type: "video/mp4" });
-            console.log(inputFileName);
+//   if (!ffmpeg.isLoaded()) {
+//     await ffmpeg.load();
+//   }
+//   console.log(inputFile);
+//   return new Promise(async (resolve, reject) => {
+//     const inputFileName = inputFile.name;
+//     // Write the input video file to FS
+//     ffmpeg.FS("writeFile", "input.mp4", new Uint8Array(await inputFile.arrayBuffer()));
+//     console.log(123);
+//     ffmpeg.setProgress(async ({ ratio }) => {
+//       const progress = (ratio * 100.0).toFixed();
+//       console.log(progress);
+//       if (progress !== "100" && progress >= "0") {
+//         Toast.loading({
+//           duration: 0,
+//           message: `压缩中 \n ${progress}%`,
+//           forbidClick: true
+//         });
+//       } else if (progress === "100") {
+//       }
+//     });
 
-            // Create a File object from the Blob
-            const compressedVideoFile = new File(
-              [compressedVideoBlob],
-              inputFileName,
-              { type: "video/mp4" }
-            );
-            resolve(compressedVideoFile)
-            //         // 创建一个新的 FormData 对象
-            // var formData = new FormData();
-            // // formData.append('file', compressedVideoFile);
-            // formData.append('blob_num', index);
-            // formData.append('file_name', inputFileName);
+//     const args = [
+//       "-i",
+//       "input.mp4",
+//       "-c:v",
+//       "libx264",
+//       "-b",
+//       "4000k",
+//       "-preset",
+//       "ultrafast",
+//       "output.mp4"
+//     ];
+//     await ffmpeg.run(...args);
+//             // Record the start time of compression
+//             const startTime = performance.now();
 
-            // // 发送 POST 请求
-            // seleHttp.post('sharUpload', formData,{
-            //   'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundarynl6gT1BKdPWIejNq'
-            // })
-            //   .then((response) => {
-            //     console.log(response);
-            //   })
-            //   .catch((error) => {
-            //     console.log(error);
-            //   });
-            // 压缩完成后，解析 Promise
-  });
-}
+//             // Calculate compression time
+//             const endTime = performance.now();
+//             const compressTime = ((endTime - startTime) / 1000).toFixed(2);
+//             console.log(`Compression time: ${compressTime} seconds`);
+
+//             // Read the compressed video file from FS
+//             const data = ffmpeg.FS("readFile", "output.mp4");
+//             const compressedVideoBlob = new Blob([data.buffer], { type: "video/mp4" });
+//             console.log(compressedVideoBlob);
+
+//             // Create a File object from the Blob
+//             const compressedVideoFile = new File(
+//               [compressedVideoBlob],
+//               inputFileName,
+//               { type: "video/mp4" }
+//             );
+//             resolve(compressedVideoFile)
+//             //         // 创建一个新的 FormData 对象
+//             // var formData = new FormData();
+//             // // formData.append('file', compressedVideoFile);
+//             // formData.append('blob_num', index);
+//             // formData.append('file_name', inputFileName);
+
+//             // // 发送 POST 请求
+//             // seleHttp.post('sharUpload', formData,{
+//             //   'Content-Type': 'multipart/form-data; boundary=----WebKitFormBoundarynl6gT1BKdPWIejNq'
+//             // })
+//             //   .then((response) => {
+//             //     console.log(response);
+//             //   })
+//             //   .catch((error) => {
+//             //     console.log(error);
+//             //   });
+//             // 压缩完成后，解析 Promise
+//   });
+// }
 
 // 上传篇
 let upload = async (data, fn, error, progress) => {
@@ -146,21 +145,20 @@ let upload = async (data, fn, error, progress) => {
     error ? error({ msg: "文件过大" }) : null;
     return 0;
   }
+  Toast.loading({
+    duration: 0,
+    message: ``,
+    forbidClick: true
+  });
   if (type && data.type === "video") {
-    // const fileChunks = await splitFile(data.imgs, 50 * 1024 * 1024);
-    // let fileFFegList = []
-    // for (let index = 0; index < fileChunks.length; index++) {
-    //   const curFile =   await compressVideo(fileChunks[index], fileChunks.length, index,data.imgs.name);
-    //   fileFFegList.push(curFile)
-    // }
-    Toast.loading({
-      duration: 0,
-      message: `压缩中 `,
-      forbidClick: true
-    });
-    const curFile = await  compressVideo(data.imgs)
-    data.imgs = curFile;
-    console.log(curFile,data.imgs,data);
+
+    // Toast.loading({
+    //   duration: 0,
+    //   message: `压缩中 `,
+    //   forbidClick: true
+    // });
+    // const curFile = await  compressVideo(data.imgs)
+    // data.imgs = curFile;
   } else if (type && data.type === "img") {
     const img = await Tools.compressFile(data.imgs);
     data.imgs = img;

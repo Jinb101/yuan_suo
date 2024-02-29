@@ -1,25 +1,38 @@
 <template>
-  <v-view header @on-view="onView">
+  <v-view header
+          @on-view="onView">
     <template #menu>
       <span @click="appPath('/info_add')">添加资讯</span>
     </template>
-    <v-page ref="page" @on-page="onPage">
-      <v-i v-model="item" :del="is_del" @change="onDetail" @edit="onEdit"></v-i>
+    <v-page ref="page"
+            @on-page="onPage">
+      <v-i v-model="item"
+           :del="is_del"
+           @change="onDetail"
+           @edit="onEdit"></v-i>
     </v-page>
     <template #fixed>
-      <v-f v-model="open" :footer="false" text="资讯详情" :index="600">
+      <v-f v-model="open"
+           :footer="false"
+           text="资讯详情"
+           :index="600">
         <template #menu>
           <span @click="edit = true">编辑资讯</span>
         </template>
-        <div class="show">
+        <div class="show index_article">
           <h2>{{ ext.title }}</h2>
           <p class="time">{{ appTimeout(ext.create_time, true) }}</p>
-          <div class="cont app_frame_content cont" v-html="ext.content"></div>
+          <div class="cont app_frame_content cont"
+               v-html="ext.content"></div>
         </div>
       </v-f>
       <transition name="van-slide-right">
-        <div class="app_show_fixed" style="z-index: 610" v-if="edit">
-          <v-e :edata="ext" edit @back="edit = false"></v-e>
+        <div class="app_show_fixed"
+             style="z-index: 610"
+             v-if="edit">
+          <v-e :edata="ext"
+               edit
+               @back="edit = false"></v-e>
         </div>
       </transition>
     </template>
@@ -38,7 +51,7 @@ export default {
       id: "",
       open: false,
       ext: {},
-      edit: false,
+      edit: false
     };
   },
   inject: ["appPath", "appTimeout"],
@@ -53,7 +66,7 @@ export default {
       if (!n) {
         this.appPath("/info", true);
       }
-    },
+    }
   },
   methods: {
     onView(e) {
@@ -66,7 +79,7 @@ export default {
       if (+page === 1) {
         this.item = [];
       }
-      this.$api.http("info", { page, type: 2 }, (e) => {
+      this.$api.http("info", { page, type: 2 }, e => {
         if (+page === 1) {
           this.item = [];
         }
@@ -77,11 +90,21 @@ export default {
     onDetail(e, fn) {
       if (e) {
         this.id = e;
-        this.$api.http("infodet", { teachers_id: e }, (res) => {
+        this.$api.http("infodet", { teachers_id: e }, res => {
           this.ext = res;
           if (fn) {
             return fn();
           }
+          this.$nextTick(() => {
+            var imgElements = document.querySelectorAll(".index_article img");
+            for (var i = 0; i < imgElements.length; i++) {
+              var src = imgElements[i].getAttribute("src");
+              if (src) {
+                var newSrc = src.replace(/\\/g, "");
+                imgElements[i].setAttribute("src", '//images.weserv.nl/?url=' + newSrc);
+              }
+            }
+          });
           this.open = true;
         });
       }
@@ -90,21 +113,23 @@ export default {
       this.onDetail(e, () => {
         this.edit = true;
       });
-    },
+    }
   },
   mounted() {
     this.id = this.$route.params.id || "";
     this.onDetail(this.id);
-  },
+  }
 };
 </script>
-<style lang='less' scoped>
+<style lang="less" scoped>
 .show {
   font-size: 15px;
+
   h2 {
     padding: 5px 8px;
     font-weight: 650;
   }
+
   .time {
     font-size: 12px;
     color: #999;
