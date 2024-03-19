@@ -181,7 +181,7 @@
           type="primary"
           icon="wechat"
           @click="onpaymoney(buydet)"
-          >点击支付({{ buydet.amount }})元</van-button
+          >点击支付 ({{ buydet.amount }}) 元</van-button
         >
       </v-f>
     </template>
@@ -311,7 +311,7 @@ export default {
         this.open = true;
       } else {
         this.$js.model(
-          "开通月卡更划算哦!",
+          "开通月卡更划算哦！",
           "点击确定去开通。点击取消直接创建",
           (r) => {
             if (r) {

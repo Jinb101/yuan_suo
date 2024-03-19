@@ -103,7 +103,7 @@ export default {
       //   return +r.id === 272;
       // });
       // if (!a.length && e.level.length > 0) {
-      //   this.$toast("无法访问,没有权限");
+      //   this.$toast("无法访问，没有权限");
       //   this.$route.back();
       //   return 0;
       // }

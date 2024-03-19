@@ -47,7 +47,7 @@
       <p>学号：{{ childdet.no }}</p>
       <p>作品说明：{{ childdet.content || "暂无" }}</p>
     </div>
-    <van-divider content-position="left">评论({{ commentlen }})</van-divider>
+    <van-divider content-position="left">评论 ({{ commentlen }})</van-divider>
     <v-c-l v-model="commentlist" @write="onwritewrite"></v-c-l>
     <v-c unfocus v-model="comment.msg" @change="onchangecomment"></v-c>
   </div>
@@ -159,6 +159,7 @@ export default {
     toframesrc(e) {
       // eslint-disable-next-line
       let t = demo.siteConfig.api.h5 + "player/?auto=1&url=";
+      console.log([t, e.video, "&pic=", e.video_picture].join(""));
       return [t, e.video, "&pic=", e.video_picture].join("");
     },
   },

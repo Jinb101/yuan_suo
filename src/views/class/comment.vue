@@ -139,37 +139,40 @@ export default {
     },
   },
   mounted() {
-    let that = this;
-    console.log(this.ids);
-    this.message = that.value;
-    // eslint-disable-next-line
-    tinymce.init({
-      selector: "#" + this.ids,
-      inline: true,
-      toolbar: false,
-      menubar: false,
-      placeholder: "评论",
-      auto_focus: true,
-      plugins: "paste",
-      init_instance_callback: function (editor) {
-        that.tinymce = editor;
-        if (that.message) {
-          editor.setContent(that.message);
-          that.text = that.message;
-          if (!that.unfocus) {
-            // eslint-disable-next-line
-            that.end(demo.$.id(that.ids));
-          }
+  console.log(123333333333333);
+  let that = this;
+  that.message = that.value; // 统一使用 that
+  console.log(133333333333333);
+  // eslint-disable-next-line no-undef
+  tinymce.init({
+    selector: "#" + that.ids, // 统一使用 that
+    inline: true,
+    toolbar: false,
+    menubar: false,
+    placeholder: "评论",
+    auto_focus: true,
+    plugins: "paste",
+    init_instance_callback: function (editor) {
+      that.tinymce = editor;
+      console.log(editor);
+      if (that.message) {
+        editor.setContent(that.message);
+        that.text = that.message;
+        if (!that.unfocus) {
+          // eslint-disable-next-line no-undef
+          that.end(demo.$.id(that.ids));
         }
-        editor.on("input", () => {
-          that.onInputs();
-        });
-        editor.on("click", () => {
-          that.open = false;
-        });
-      },
-    });
-  },
+      }
+      editor.on("input", () => {
+        that.onInputs();
+      });
+      editor.on("click", () => {
+        console.log(132);
+        that.open = false;
+      });
+    },
+  });
+},
   destroyed() {
     this.tinymce && this.tinymce.destroy();
   },

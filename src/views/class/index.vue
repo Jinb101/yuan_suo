@@ -42,7 +42,7 @@
         <!-- 点击头像 进入 该用户朋友圈主页
       点击图片 放大预览
       点击评论 触发 @评论
-      点击tool无反应
+      点击 tool 无反应
       点击其他 进入详情 -->
         <section class="l_box flex van-hairline--bottom"
                  v-for="(i, j) in item"
@@ -117,7 +117,7 @@
                        alt=""
                        class="db_image" />
                 </div>
-                <b>{{ +i.is_like === 1 ? "取消" : "" }}点赞({{
+                <b>{{ +i.is_like === 1 ? "取消" : "" }}点赞 ({{
                   i.likes.length
                 }})</b>
               </div>
@@ -134,7 +134,7 @@
                        alt=""
                        class="db_image" />
                 </div>
-                <b>评论({{ i.comment_count }})</b>
+                <b>评论 ({{ i.comment_count }})</b>
               </div>
             </div>
             <div class="likes flex"
@@ -321,12 +321,12 @@ export default {
       }
     },
     iconClick(event, direction) {
-      // 获取van-swipe__track节点
+      // 获取 van-swipe__track 节点
       const track = document.querySelector('.van-swipe__track');
-      // 获取van-swipe-item的宽度
+      // 获取 van-swipe-item 的宽度
       const itemWidth = track.querySelector('.van-swipe-item').offsetWidth;
       let curIndex = this.curImgIndex + 1;
-      // 根据点击方向设置transform属性
+      // 根据点击方向设置 transform 属性
       if (direction === 'left') {
         // 向左点击
         if (curIndex === 1) {
@@ -385,7 +385,7 @@ export default {
       }
       this.curImgIndex = y;
     },
-    // 下载downloadImg
+    // 下载 downloadImg
     downloadImg() {
       if (!this.right_Menu) {
         return
@@ -461,7 +461,7 @@ export default {
       this.item.forEach((item) => {
         item.comment.forEach((comment, index) => {
           if (comment.id === c.id) {
-            // 删除对应的comment数据
+            // 删除对应的 comment 数据
             item.comment.splice(index, 1);
             item.comment_count--;
           }
@@ -478,7 +478,7 @@ export default {
         this.item.forEach((item) => {
           item.comment.forEach((comment, index) => {
             if (comment.id === c.id) {
-              // 删除对应的comment数据
+              // 删除对应的 comment 数据
               item.comment.splice(index, 1);
               item.comment_count--;
             }
@@ -521,7 +521,7 @@ export default {
         this.onPage(1)
         return
       }
-      // 需要给 ref search 下的input框 直接获取焦点
+      // 需要给 ref search 下的 input 框 直接获取焦点
       this.showSearch = open;
       this.$nextTick(() => {
         let search = document.getElementsByClassName('view_seach')[0]
@@ -1339,12 +1339,12 @@ export default {
 
   .van-icon-arrow:hover {
     transform: scale(1.2);
-    /* 鼠标移入时放大到1.2倍 */
+    /* 鼠标移入时放大到 1.2 倍 */
   }
 
   .van-icon-arrow-left:hover {
     transform: scale(1.2);
-    /* 鼠标移入时放大到1.2倍 */
+    /* 鼠标移入时放大到 1.2 倍 */
   }
 }
 

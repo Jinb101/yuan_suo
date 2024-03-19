@@ -231,6 +231,7 @@ export default {
     },
     init() {
       let i = this.ext || {};
+      console.log(this.edit, i);
       if (this.edit) {
         let t = (i.activity_name + "").split("/#br#/");
         this.ftitle = t[1] || "";
@@ -245,10 +246,10 @@ export default {
           start_time: demo.timeout(i.start_time, "ymd", "-"),
           // eslint-disable-next-line
           end_time: demo.timeout(i.end_time, "ymd", "-"),
-          number_votes: i.number_votes || 1,
-          score_per_vote: i.score_per_vote || "3",
-          comment_score: i.comment_score || "4",
-          completion_score: i.completion_score || "4",
+          number_votes: this.edit ? i.number_votes : 1,
+          score_per_vote: this.edit ? i.score_per_vote : "3",
+          comment_score: this.edit ? i.comment_score : "4",
+          completion_score: this.edit ? i.completion_score : "4",
         };
         this.img = {
           src: i.cover_images,

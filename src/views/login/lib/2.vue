@@ -52,7 +52,8 @@ export default {
       this.once = 1;
       this.$api.http(
         "gettoken",
-        { code: this.code, n_id: this.id },
+        // eslint-disable-next-line no-undef
+        { code: demo.getUrl().code || this.code, n_id: this.id },
         (res, code) => {
           // eslint-disable-next-line
           demo.$session.reset();
@@ -84,7 +85,8 @@ export default {
       );
     },
     gettoken() {
-      this.$api.http("getys", { code: this.code, nursery_id: 0 }, (r) => {
+      // eslint-disable-next-line no-undef
+      this.$api.http("getys", { code: demo.getUrl().code || this.code, nursery_id: 0 }, (r) => {
         this.det = (r || []).map((s) => {
           return {
             label: (s.nursery || {}).name,
@@ -98,7 +100,7 @@ export default {
       if (this.id > 0) {
         // eslint-disable-next-line
         let c = demo.$local.get("login-code-once-data");
-        if (c === this.code) {
+        if (c && c === this.code) {
           console.warn("code 已使用");
           return 0;
         }
@@ -123,6 +125,7 @@ export default {
     // eslint-disable-next-line
     let v = demo.getUrl();
     this.code = v.code;
+    console.log(v.code);
     this.id = v.id;
     if (!this.code) {
       this.appPath("/login");

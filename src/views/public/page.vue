@@ -5,7 +5,7 @@
       :finished="finished"
       finished-text="没有更多了"
       @load="onLoad"
-    >
+      >
       <slot />
     </van-list>
   </van-pull-refresh>
@@ -27,10 +27,11 @@ export default {
         this.list = [];
         this.refreshing = false;
       }
-      this.loading = false;
       if (finish) {
         this.finished = true;
       }
+      this.loading = false;
+      this.refreshing = false;
     },
     onLoad() {
       this.page++;
@@ -39,7 +40,6 @@ export default {
     onRefresh() {
       // 清空列表数据
       this.finished = false;
-
       this.page = 0;
       // 重新加载数据
       // 将 loading 设置为 true，表示处于加载状态

@@ -31,7 +31,7 @@
         <div class="qrs">
           <div id="qr-login-view"></div>
         </div>
-        <p class="qr_desc">请打开我的园所-设置-扫码登录进行扫码</p>
+        <p class="qr_desc">请打开我的园所 - 设置 - 扫码登录进行扫码</p>
       </v-f>
       <slot name="footer" />
     </template>

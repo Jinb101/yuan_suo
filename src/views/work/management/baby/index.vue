@@ -11,6 +11,7 @@
       >
         <template #title>
           <span class="font">{{ i.video_name }}</span>
+          <span class="font_viewers">{{ i.viewers }} 人正在观看</span>
         </template>
       </van-cell>
     </v-page>
@@ -77,6 +78,7 @@ export default {
     },
   },
   mounted() {
+    console.log(this.$route.params.id, "this.$route.params.id");
     this.id = this.$route.params.id || "";
     if (this.id) {
       this.ondetail({ baby_id: this.id });
@@ -88,5 +90,10 @@ export default {
 .font {
   font-weight: 650;
   font-size: 15px;
+}
+.font_viewers{
+          margin-left: 10px;
+          font-size:  12px ;
+          color: gray;
 }
 </style>

@@ -34,10 +34,10 @@
     <transition name="van-fade">
       <div class="all_add flex" v-if="isallsend">
         <van-button block round type="info" @click="open1 = true"
-          >点击发送(历史)</van-button
+          >点击发送 (历史)</van-button
         >
         <van-button block round :color="$js.btnColor" @click="onsenddate(true)"
-          >点击发送(今日)</van-button
+          >点击发送 (今日)</van-button
         >
       </div>
     </transition>

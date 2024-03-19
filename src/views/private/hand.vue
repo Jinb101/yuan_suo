@@ -51,9 +51,9 @@
             v-else><van-icon name="upgrade" />保存签名</span>
     </div>
     <!-- <p class="tips">
-      提示：若手写不成功或者手写板出现异常，可尝试点击[<b class="col_green"
+      提示：若手写不成功或者手写板出现异常，可尝试点击 [<b class="col_green"
         >清除</b
-      >]重试或者点击[<b class="col_green">全屏</b>]进行手写
+      >] 重试或者点击 [<b class="col_green">全屏</b>] 进行手写
     </p> -->
   </div>
 </template>

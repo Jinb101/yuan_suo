@@ -104,8 +104,11 @@
           </van-collapse-item>
         </van-collapse>
         <div class="app_bottom">
-          <van-button block round :color="$js.btnColor" @click="oneditfood"
-            >编辑</van-button
+          <van-button class="btn_left"  @click="oneditfood"
+            >编辑历史</van-button
+          >
+          <van-button class="btn_right"   @click="onadd" v-if="!issup" :color="$js.btnColor"
+            >发布新食谱</van-button
           >
         </div>
       </template>
@@ -164,11 +167,10 @@
           @on-loading="onUpload"
         ></v-upload>
       </div>
-      <div class="app_btn_add b20" @click="onadd" v-if="!issup">
-        <div class="add_cover"><van-icon name="plus" /></div>
-        <p>发布</p>
-      </div>
-      <v-f v-model="open1" :footer="false" text="添加食谱">
+      <!-- <div class="app_btn_add b20"  @click="oneditfood">
+        <p>编辑</p>
+      </div> -->
+      <v-f v-model="open1" :footer="false" :text="titleText">
         <v-a v-model="addext" @end="onend"></v-a>
       </v-f>
     </template>
@@ -183,7 +185,7 @@ export default {
   data() {
     return {
       issup: null, // 是否有供应商
-      id: "", // 宝宝1/老师2 食谱分类
+      id: "", // 宝宝 1/老师 2 食谱分类
       list: [],
       types: ["", "早餐", "早点", "午餐", "午点", "晚餐"],
       // eslint-disable-next-line
@@ -201,11 +203,17 @@ export default {
       },
       open1: false, // 控制发布
       addext: {},
+      titleText: '添加食谱'
     };
   },
   components: { vF, vA },
   inject: ["reload", "appShowImage", "appPath"],
   computed: {},
+  watch: {
+  addext: function (v, o) {
+    this.titleText = v.$edit ? '编辑食谱' : '添加食谱';
+      }
+    },
   methods: {
     onend() {
       this.open1 = false;
@@ -236,7 +244,7 @@ export default {
         img_urls: obj.img_urls || [],
       };
       if (this.uploadconfig.img_url.length >= 3) {
-        return this.$toast("最大可上传3张");
+        return this.$toast("最大可上传 3 张");
       }
       if (this.$refs.upload) {
         this.$refs.upload.onclear(true);
@@ -346,6 +354,7 @@ export default {
   },
   mounted() {
     this.id = this.$route.params.id || "1";
+    console.log(123);
     this.init();
   },
 };
@@ -463,5 +472,22 @@ export default {
 }
 .foot {
   height: 80px;
+}
+.app_bottom{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.btn_left{
+  width:49%;
+  border-top-left-radius: 6px;
+  border-bottom-left-radius: 6px;
+  background-color: #ff6347;
+  color: #fff;
+}
+.btn_right{
+  width:49%;
+  border-top-right-radius: 6px;
+  border-bottom-right-radius: 6px;
 }
 </style>

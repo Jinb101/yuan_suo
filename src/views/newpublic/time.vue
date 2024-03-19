@@ -34,7 +34,7 @@ export default {
     value: null,
     max: String, // d_7 m_5 y_3
     min: String,
-    once: [String, Number], // 静默获取 0当月 1下月 -1上月
+    once: [String, Number], // 静默获取 0 当月 1 下月 -1 上月
   },
   data() {
     return {

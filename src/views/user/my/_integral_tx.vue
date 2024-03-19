@@ -134,7 +134,7 @@ export default {
           }
         );
       } else {
-        // 获取授权 支付id 提现
+        // 获取授权 支付 id 提现
         let os = {
           type: "admin",
           // eslint-disable-next-line

@@ -161,6 +161,7 @@ import vF from "../../private/fixed.vue";
 import vT from "../../private/time.vue";
 import vH from "../../private/hand.vue";
 import vM from "../../user/my/_sign.vue";
+
 export default {
   props: {
     value: null,
@@ -317,15 +318,20 @@ export default {
         // 新增 查看是否有签名 有则自动加入
         // eslint-disable-next-line
         let sign = demo.$local.get("work_connection-write", "");
-        if (sign) {
-          this.onchangewrite({ sign });
-        } else {
+        console.log(sign);
+        // if (sign) {
+          // this.onchangewrite({ sign });
+        // } else {
           this.$api.http("usermysign", {}, (r) => {
+            // console.log(r);
             if (r.length > 0) {
-              this.onchangewrite({ sign: r[0].sign });
+              // 从长度中随机 拿一个下标
+              let index = Math.floor(Math.random() * r.length);
+              // console.log(index, '------------------', r[index].sign);
+              this.onchangewrite({ sign: r[index].sign });
             }
           });
-        }
+        // }
       });
     },
     initonce() {
@@ -336,7 +342,7 @@ export default {
           this.ext = res;
           // eslint-disable-next-line
           demo.title(res.name + "的在园记录表");
-
+          console.log(res);
           this.$nextTick(() => {
             if (this.teachwrite) {
               this.hand = {

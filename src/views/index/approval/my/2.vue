@@ -83,13 +83,13 @@
       <div class="list_box other">
         <template v-if="+child !== 1">
           <p>
-            申请部门:<b>{{ ext.apply_group }}</b>
+            申请部门：<b>{{ ext.apply_group }}</b>
           </p>
           <p>
-            申请人:<b>{{ ext.apply_name }}</b>
+            申请人：<b>{{ ext.apply_name }}</b>
           </p>
           <p>
-            联系电话:<b
+            联系电话：<b
               ><a :href="'tel:' + ext.apply_contact">{{
                 ext.apply_contact
               }}</a></b
@@ -104,7 +104,7 @@
             审批人：<b>{{ ext.approval_name }}</b>
           </p>
           <p>
-            联系电话:<b
+            联系电话：<b
               ><a :href="'tel:' + ext.approval_contact">{{
                 ext.approval_contact
               }}</a></b
@@ -112,10 +112,10 @@
           </p>
         </template>
         <p>
-          申请时间:<b>{{ ext.apply_time }}</b>
+          申请时间：<b>{{ ext.apply_time }}</b>
         </p>
         <p>
-          知会人:
+          知会人：
           <b v-if="ext.inform && ext.inform.length">
             <van-tag
               plain

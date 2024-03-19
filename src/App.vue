@@ -45,6 +45,7 @@ export default {
       src_h5: "",
       openh5: false,
       params: {},
+      version: process.env.VERSION,
     };
   },
   components: { vF },
@@ -198,7 +199,7 @@ export default {
       this.$api.http("finlevel", {}, (r) => {
         let o = {
           time: tm + 3e5,
-          level: r.authority, // 1:有权限 2：无权限 3：部分权限(查看报表)
+          level: r.authority, // 1:有权限 2：无权限 3：部分权限 (查看报表)
           ispwd: r.set_password === 1,
         };
         // eslint-disable-next-line
@@ -208,8 +209,18 @@ export default {
     },
   },
   mounted() {
+    // 获取本地 名为 VERSION 的环境变量
+    const localVersion = localStorage.getItem("VERSION");
+    // 如果没有本地版本号或者本地版本号与当前版本号不一致
+    if (!localVersion || localVersion !== this.version) {
+      // 设置本地版本号为当前版本号
+      localStorage.setItem("VERSION", this.version);
+      // 刷新页面 重新加载资源
+      window.location.reload();
+    }
     // eslint-disable-next-line
     this.params = demo.getUrl();
+    console.log(this.version);
   },
 };
 </script>

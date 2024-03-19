@@ -69,7 +69,7 @@
         type="digit"
         placeholder="非必填，请输入专注时间"
       />
-      <h4>工作情况记录 (最多选2项)</h4>
+      <h4>工作情况记录 (最多选 2 项)</h4>
       <van-checkbox-group v-model="result" max="2">
         <van-cell-group>
           <van-cell

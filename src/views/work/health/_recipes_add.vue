@@ -108,6 +108,7 @@ export default {
       t1: {},
       t2: {},
       item: [],
+      oldItem: [],
       active: "0",
       imgs: [],
     };
@@ -134,6 +135,7 @@ export default {
       return "发布";
     },
     start_time() {
+      console.log(this.t1.ymd, this.t1, this.item);
       if (this.t1.ymd) {
         return [this.t1.ymd, this.t1.obj.w].join(" ");
       }
@@ -164,7 +166,7 @@ export default {
         this.tosetitem();
       }
     },
-    start_time() {
+    start_time(v, o) {
       if (this.join_time) {
         this.tosetitem();
       }
@@ -186,7 +188,7 @@ export default {
           // eslint-disable-next-line
           week: demo.timeout(s.timeout, "object").w,
           time: s.timeout,
-          list: "早餐,早点,午餐,午点,晚餐".split(",").map((k) => {
+          list: "早餐，早点，午餐，午点，晚餐".split("，").map((k) => {
             return {
               title: k,
               content: "",
@@ -197,6 +199,14 @@ export default {
           }),
         };
       });
+      if (this.oldItem.length > 0) {
+        this.oldItem.forEach((s) => {
+          let matchingItems = dmap.filter((r) => r.week === s.week);
+          matchingItems.forEach((item) => {
+            item.list = s.list;
+          });
+        });
+      }
       this.item = JSON.parse(JSON.stringify(dmap));
     },
     totimeset(timeout) {
@@ -244,6 +254,7 @@ export default {
               };
             });
             this.item = v;
+            this.oldItem = v
           });
         } else {
           this.imgs = list[0].list.map((k) => {
@@ -334,7 +345,12 @@ export default {
     },
   },
   mounted() {
+    console.log(this.value);
     this.ext = this.value;
+    if (this.edit) {
+      this.$router.meta.title = "编辑食谱";
+    }
+    console.log(this.edit, this.$router);
     this.init();
   },
 };

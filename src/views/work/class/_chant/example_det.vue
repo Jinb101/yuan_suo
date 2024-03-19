@@ -171,7 +171,7 @@ export default {
         return 0;
       }
       window.location.replace(os);
-      // 需要openid 跳转至
+      // 需要 openid 跳转至
       // this.$api.http(
       //   "chantvideopay",
       //   { presentation_id: this.det.presentation_id, open_id: "" },
